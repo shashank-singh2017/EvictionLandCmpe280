@@ -12,12 +12,12 @@
     IMPORT FILES
 -------------------------------------------------------------------*/
 
-@import url(css/animate.css);
-@import url(css/camera.css);
-@import url(css/flaticon.css);
-@import url(css/prettyPhoto.css);
-@import url(css/owl.carousel.css);
-@import url(css/font-awesome.min.css);
+@import url(stylesheets/animate.css);
+@import url(stylesheets/camera.css);
+@import url(stylesheets/flaticon.css);
+@import url(stylesheets/prettyPhoto.css);
+@import url(stylesheets/owl.carousel.css);
+@import url(stylesheets/font-awesome.min.css);
 
 /*------------------------------------------------------------------
     SKELETON
@@ -385,10 +385,33 @@ a img.aligncenter {
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: #000;
+     background-color: #000;
     z-index: 0;
     opacity: .6;
 }
+
+.main-banner1{
+	height: 100%;
+	position: relative;
+}
+
+.main-banner1{
+	display: table;
+    width: 100%;
+	text-align: center;
+}
+.main-banner1::after {
+    content: " ";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 0;
+    opacity: .6;
+}
+
+
 .heading{
 	color: #fff;
 	display: table-cell;

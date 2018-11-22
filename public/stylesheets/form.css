@@ -22,22 +22,16 @@ html {
     padding-top: 5%;
 }
 
-.email, .name, .phone {
-    width: 300px;
-    height: 28px;
+.email, .name, .phone, .password, .state {
+    width: 100%;
     border: 1px solid;
     border-radius: 3px;
 }
 
-.password {
-    width: 197px;
-    height: 28px;
-    border: 1px solid;
-    border-radius: 3px;
-}
 
 .inputFields {
     margin-top: 15px;
+    height: 50px;
 }
 
 .textBox {
@@ -72,7 +66,7 @@ html {
 }
 
 .inpField {
-    height: 30px;
+    height: 35px;
     width: 250px;
 }
 
@@ -88,4 +82,8 @@ html {
     background-color: maroon;
     font-size: 14px;
     font-weight: 900px;
+}
+
+.formBox {
+    margin-left: 30%;
 }
