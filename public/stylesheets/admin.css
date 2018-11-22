@@ -1,0 +1,164 @@
+.landingContainer {
+    margin-top: 40px;
+    font-size: 20px;
+    text-align: center;
+}
+
+.heading {
+    font-size: 18px;
+    font-family: SansSerif;
+    font-weight: 700;
+}
+
+.okButton, .clearButton {
+    font-size: 14px;
+    border: 1px solid;
+    border-color: white;
+    color: white;
+    font-weight: 400;
+    background-color: maroon;
+    height: 30px;
+}
+
+.clearButton {
+    margin-left: 15px;
+}
+
+.heading {
+    margin-left: 45%;
+}
+
+.msg {
+    color: green;
+}
+
+.err {
+    color: red;
+}
+
+.leftside{
+    width: 40%;
+    display: inline-block;
+    vertical-align: top;
+}
+.rightside{
+    width: 59%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.userRecord {
+    border: 1px solid;
+    margin-bottom: 20px;
+}
+
+.userRecord span{
+    display: inline-block;
+    padding: 10px 0px 10px 10px ;
+}
+.userName{
+    width: 17%;
+}
+
+.email {
+    width: 40%;
+}
+
+.phone {
+    width: 15%;
+}
+
+.userName, .email, .phone {
+    font-size: 15px;
+}
+
+
+.searchuser{
+    line-height: 20px;
+    width: 300px;
+    margin-bottom: 15px;
+}
+
+.forms{
+    min-height: 400px;
+}
+
+
+#evictionsearchResult{
+    height: 500px;
+    overflow: hidden;
+    overflow-y: scroll;
+    width: 80%;
+    //margin-left: auto;
+    //margin-right: auto;
+    border: 1px solid black;
+    margin-top: 35px;
+    margin-bottom: 35px;
+    padding: 30px;
+    display: inline-block;
+}
+
+
+#evictionsearchResult th {
+    font-family: Lato-Bold;
+    font-size: 18px;
+    color: #fff;
+    line-height: 1;
+    background-color: #e24000;
+    padding-top: 18px;
+    padding-bottom: 18px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#evictionsearchResult td {
+    text-align: center;
+}
+
+.evictionFilter{
+    vertical-align: top;
+    display: inline-block;
+    margin-top: 35px;
+    margin-bottom: 35px;
+    padding: 30px;
+    border: 1px solid black;
+    width: 10%;
+    line-height: 2;
+    font-size: 20px;
+    height: 500px;
+}
+
+button#SearchEviction {
+    font-size: 14px;
+    border: 1px solid;
+    border-color: white;
+    color: white;
+    font-weight: 400;
+    background-color: maroon;
+    height: 30px;
+    /* text-align: center; */
+    /* margin-left: auto; */
+    /* margin-right: auto; */
+    margin-left: 45px;
+    margin-top: 10px;
+}
+
+.populateData{
+    padding: 30px;
+    border: 1px solid black;
+}
+
+.populateData .title{
+    display: block;
+    font-size: 20px;
+    font-weight: bolder;
+}
+
+.actionButton{
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+}

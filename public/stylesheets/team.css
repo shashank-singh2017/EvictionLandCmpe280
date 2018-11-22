@@ -1,0 +1,62 @@
+html, body {
+  height: 100%;
+  margin: 0;
+}
+.team {
+  margin-top: 15px;
+  height: 500px;
+}
+
+.photo1, .photo2, .photo3, .photo4 {
+  width: 200px;
+  height: 200px;
+  min-width: 100px;
+  min-height: 100px;
+  max-width: 350px;
+  max-height: 300px;
+  border: 3px solid;
+  float: left;
+  margin-right: 10px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-blend-mode: color-dodge;
+}
+
+.photo1 {
+  background-image: url('/images/shashank.jpg');
+}
+
+.photo4 {
+  background-image: url('/images/pavana.jpg');
+}
+
+.about {
+  width: 70%;
+  margin-left: 22%;
+}
+
+.skills, .contact {
+  width: 70%;
+  margin-left: 22%;
+  margin-top: 10px;
+  background-color: white;
+  padding: 10px;
+}
+
+
+.tabs {
+  display: inline;
+}
+
+.cont {
+  background-color: white;
+}
+
+.photo3 {
+  background-image: url('/images/divya.jpg');
+}
+
+.photo2 {
+  background-image: url('/images/Arsh.png');
+}

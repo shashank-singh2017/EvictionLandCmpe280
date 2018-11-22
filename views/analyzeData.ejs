@@ -1,0 +1,102 @@
+<html>
+    <meta charset="utf-8">
+
+    <head>
+        <link rel="stylesheet" href="/stylesheets/analyzeData.css">
+        <script src="/external/jquery/jquery.js"></script>
+        <script src="/javascripts/jquery-ui.js"></script>
+        <script src="/javascripts/domModify.js"></script>
+        <script>
+            var seleted;
+            var data;
+            $(function() {
+                $("#draggableStates").sortable();
+                $("#draggableStates").disableSelection();
+                $("#draggableStates li").draggable();
+                $("#droppable").droppable({
+                    drop: function(event, ui) {
+                        $(this)
+                            .addClass("ui-state-highlight")
+                            .find("p")
+                            .html(ui.draggable[0].innerText);
+                        seleted = ui.draggable[0].innerText;
+                        const Url = "http://localhost:3000/analyzeData/county?selectedState=" + seleted;
+                        $.ajax({
+                            url: Url,
+                            type: "GET"
+                        }).always(function(res) {
+
+                            var html = "";
+                            for (var i = 0; i < res.data.length; i++) {
+                                html += ' <div class="stateNames ui-widget-content">' +
+                                    '<span class="stateDataCounty">' + res.data[i].county + '</span>' +
+                                    '<span class="stateDataCase">' + res.data[i].case_numbers + '</span>' +
+                                    '</div>';
+                            }
+                            $('#responseStateData').html(html);
+                            data = res.data;
+
+                        });
+
+                    }
+                });
+            });
+
+            data = <%- JSON.stringify(data) %>;
+        </script>
+    </head>
+
+    <body onload=headerModification()>
+        <div class="header">
+            <% include header %>
+        </div>
+
+        <div class="mainBody">
+            <span class="stateTitle">States</span>
+            <ul id="draggableStates">
+                <%
+        var options = states;
+        for ( var i = 0; i < options.length; i++ )
+        {
+        %>
+                    <div class="stateNames ui-widget-content">
+                        <%= options[i].state %>
+                    </div>
+                    <%
+        }
+        %>
+            </ul>
+            <div id="droppable" class="ui-widget-header">
+                <div>Selected state:</div>
+                <p name="selectedState">Drop here</p>
+            </div>
+
+            <div class="stateData">
+                <div>Data:</div>
+                <div class="stateNames ui-widget-content">
+                    <span class="stateDataCounty selectedTitle">County</span>
+                    <span class="stateDataCase selectedTitle">Eviction count</span>
+                </div>
+                <div id="responseStateData">
+                    <%
+        for ( var i = 0; i < data.length; i++ )
+        {
+        %>
+                        <div class="stateNames ui-widget-content">
+                            <span class="stateDataCounty"><%= data[i].county %> </span>
+                            <span class="stateDataCase"><%= data[i].case_numbers %> </span>
+                        </div>
+                        <%
+        }
+        %>
+                </div>
+            </div>
+
+
+
+
+        </div>
+        <% include footer %>
+    </body>
+
+</html>

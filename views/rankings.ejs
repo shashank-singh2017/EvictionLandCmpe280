@@ -1,0 +1,188 @@
+<html>
+    <meta charset="utf-8">
+
+    <head>
+        <link rel="stylesheet" href="/stylesheets/bargraph.css">
+        <link rel="stylesheet" href="/stylesheets/rankings.css">
+        <link rel="stylesheet" href="/stylesheets/header.css">
+        <link href="/stylesheets/jquery-ui.css" rel="stylesheet">
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+        <script src="/javascripts/domModify.js"></script>
+
+        <script>
+            $(function() {
+                var availableTags = [
+                    "Maryland",
+                    "New York",
+                    "Michigan",
+                    "Texas",
+                    "Georgia",
+                    "New Jersey",
+                    "Nevada",
+                    "District of Columbia",
+                    "Ohio",
+                    "Virginia",
+                    "Pennsylvania",
+                    "Delaware",
+                    "Missouri",
+                    "Colorado",
+                    "Massachusetts",
+                    "Nebraska",
+                    "Utah",
+                    "Hawaii",
+                    "Alaska",
+                    "Arkansas",
+                    "New Mexico",
+                    "Maine",
+                    "North Dakota",
+                    "Wyoming",
+                    "Vermont",
+                    "South Dakota"
+                ];
+
+                $("#tags").autocomplete({
+                    source: availableTags
+                });
+
+            });
+        </script>
+    </head>
+
+    <body onload=headerModification()>
+        <div class="header"></div>
+        <div>
+
+            <div class="header">
+                <nav>
+                    <ul id="navList">
+                        <li><span>EvictionLand</span></li>
+                        <li><a href="/home">Home</a></li>
+                        <li><a href="/dashboard/state">Dashboard</a></li>
+                        <li><a href="/rankings">Rankings</a></li>
+                        <li><a href="/ourteam">Contact</a></li>
+                        <li><a href="/users/logout">Logout</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="forms">
+                <div class="form1">
+                    <form class="rankingForm" method="get" action="/rankings/state">
+                        <div class="heading">Please search a region to display Eviction Rankings</div>
+
+                        <div class="ui-widget">
+                            <label for="tags">Search: </label>
+                            <input id="tags" name="selectedState">
+                            <button class="okButton" type="submit">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+
+        </div>
+        <br>
+        <br>
+        <div class="rankingheading"> Top <span id="numbers"></span>results with Eviction Rate in Descending order:</div>
+        <div id="graphic" class="graphic"></div>
+        <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+        <script>
+            //set up svg using margin conventions - we'll need plenty of room on the left for labels
+            var data;
+            data = <%- JSON.stringify(data) %>;
+            var margin = {
+                top: 20,
+                right: 25,
+                bottom: 5,
+                left: 60
+            };
+
+            var width = 960 - margin.left - margin.right,
+                height = 500 - margin.top - margin.bottom;
+
+            var svg = d3.select("#graphic").append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+            var x = d3.scale.linear()
+                .range([0, width])
+                .domain([0, d3.max(data, function(d) {
+                    return d.case_numbers;
+                })]);
+
+            var y = d3.scale.ordinal()
+                .rangeRoundBands([height, 0], .1)
+                .domain(data.map(function(d) {
+                    return d.county;
+                }));
+
+            var bars = svg.selectAll(".bar")
+                .data(data)
+                .enter()
+                .append("g")
+
+            var tooltip = d3.select("#graphic")
+                .append("div")
+                .attr("class", "mytooltip")
+                .text("custom");
+
+            //append rects
+            bars.append("rect")
+                .attr("class", "bar")
+                .attr("y", function(d) {
+                    return y(d.county);
+                })
+                .attr("height", y.rangeBand())
+                .attr("x", 0)
+                .attr("width", function(d) {
+                    return x(d.case_numbers);
+                })
+                .on("mouseover", function() {
+                    return tooltip.style("visibility", "visible");
+                })
+                .on("mousemove", function(d) {
+                    return tooltip.style("top",
+                            (d3.event.pageY - 10) + "px").style("left", (d3.event.pageX + 10) + "px")
+                        .text("Rank: " + d.rank + "\nCounty: " + d.county + "\nCase No.: " + d.case_numbers);
+                })
+                .on("mouseout", function() {
+                    return tooltip.style("visibility", "hidden");
+                });
+
+            //add a value label to the right of each bar
+            bars.append("text")
+                .attr("class", "ranking_name")
+                //y position of the label is halfway down the bar
+                .attr("y", function(d) {
+                    return y(d.county) + y.rangeBand() / 2 + 4;
+                })
+                //x position is 3 pixels to the right of the bar
+                .attr("x", function(d) {
+                    return 5;
+                })
+                .text(function(d) {
+                    return d.county + "   " + d.case_numbers;
+                });
+
+            bars.append("text")
+                .attr("class", "ranks")
+                //y position of the label is halfway down the bar
+                .attr("y", function(d) {
+                    return y(d.county) + y.rangeBand() / 2 + 4;
+                })
+                //x position is 3 pixels to the right of the bar
+                .attr("x", function(d) {
+                    return -30;
+                })
+                .text(function(d) {
+                    return d.rank;
+                });
+        </script>
+        <script src="/external/jquery/jquery.js"></script>
+        <script src="/javascripts/jquery-ui.js"></script>
+        <% include footer %>
+    </body>

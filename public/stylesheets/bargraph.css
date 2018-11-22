@@ -1,0 +1,31 @@
+html, body {
+  margin: 0;
+}
+
+.bar {
+    fill: #f9d4cc;
+}
+
+.axis {
+    font-size: 13px;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    display: none;
+}
+
+.label {
+    font-size: 13px;
+}
+
+.ranking_name{
+    font-family: GT-Eesti-Text-Bold,sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.rankingForm {
+    margin-top: 3%;
+}

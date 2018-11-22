@@ -1,0 +1,32 @@
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Team</title>
+    <link rel="stylesheet" href="/stylesheets/jquery-ui.css">
+    <script src="/javascripts/domModify.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+      $(init);
+      function init() {
+        $("#tabs").tabs();
+      }
+    </script>
+    <title>Our Team</title>
+  </head>
+
+  <body onload=headerModification()>
+    <% include header %>
+      <div id="tabs">
+        <ul>
+          <li><a href="/shashank">Shashank</a></li>
+          <li><a href="/arshdeep">Arshdeep</a></li>
+          <li><a href="/divya">Divya</a></li>
+          <li><a href="/pavana">Pavana</a></li>
+        </ul>
+      </div>
+
+      <% include footer %>
+  </body>
+
+</html>

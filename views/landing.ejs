@@ -1,0 +1,284 @@
+<html>
+<meta charset="utf-8">
+
+<head>
+    <link href="/stylesheets/jquery-ui.css" rel="stylesheet">
+    <link href="/stylesheets/admin.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="/javascripts/domModify.js"></script>
+    <script src="/external/jquery/jquery.js"></script>
+    <script src="/javascripts/jquery-ui.js"></script>
+    <script>
+        setTimeout(function () {
+            $("#editContainer").hide();
+        }, 10);
+
+        function deleteuser(event) {
+            var email = event.currentTarget.closest(".userRecord").querySelector(".email").innerText;
+            console.log(email);
+            const Url = "http://localhost:3000/admin/deleteUser?user=" + email;
+            $.ajax({
+                type: "POST",
+                url: Url,
+                data: {
+                    user: email
+                },
+                success: function (res) {
+                    $('#searchResult').html("Deleted User");
+                }
+            });
+        }
+
+        function SearchEviction(event) {
+            var state = document.getElementById("stateEntered").value;
+            const Url = "http://localhost:3000/admin/showEvictionByState";
+            if (state) {
+                $.ajax({
+                    type: "GET",
+                    url: Url,
+                    data: {
+                        state: state
+                    },
+                    success: function (res) {
+                        $("body").html(res)
+                    }
+                });
+            }
+        }
+
+        function edituser(event) {
+            $("#editContainer").show();
+            var email = event.currentTarget.closest(".userRecord").querySelector(".email").innerText;
+            var userName = event.currentTarget.closest(".userRecord").querySelector(".userName").innerText;
+            var phone = event.currentTarget.closest(".userRecord").querySelector(".phone").innerText;
+            document.getElementById("editname").value = userName;
+            document.getElementById("editNumber").value = phone;
+            document.getElementById("editemail").value = email;
+        }
+
+        function updateuser(event) {
+            var username = document.getElementById("editname").value;
+            var number = document.getElementById("editNumber").value;
+            var email = document.getElementById("editemail").value;
+            if (username == "" || number == "") {
+
+            } else {
+                var data = {
+                    username: username,
+                    number: number,
+                    email: email
+                };
+                const Url = "http://localhost:3000/admin/updateUser";
+                $.ajax({
+                    type: "POST",
+                    url: Url,
+                    data: data,
+                    success: function (res) {
+                        $('#searchResult').html("Updated User");
+                        document.getElementById("editContainer").style.display = "none";
+                    }
+                });
+            }
+        }
+
+        function deleteEntry(id) {
+            var data = {
+                id:id
+            };
+            const Url = "http://localhost:3000/admin/deleteEntry";
+            $.ajax({
+                type: "DELETE",
+                url: Url,
+                data: data,
+                success: function (res) {
+                    evictiondata = res.evictiondata;
+                    $( "#dataTable" ).load( "home #dataTable" );
+                    // $("#tableMessage").html("Entry deleted Successfully");
+                }
+            });
+
+        }
+
+        function showEntry(id) {
+            const URL = "http://localhost:3000/create/showEntry?id="+id;
+            location.href = URL;
+        }
+
+        function updateEntry(id) {
+            const URL = "http://localhost:3000/create/updateEntry?id="+id;
+            location.href = URL;
+        }
+    </script>
+</head>
+
+
+<body onload=headerModification()>
+<div class="header"></div>
+<div>
+    <% include header %>
+    <div class="mainContent">
+        <div class="evictionFilter">
+            Search eviction <input name="stateEntered" id="stateEntered" placeholder="State">
+            <button class="SearchEviction" id="SearchEviction" onclick="SearchEviction(event)">Search</button>
+            <br/>
+            <br/>
+            <form action="/create/" method="get">
+                Create New Record
+                <button type="submit" >Create Record</button>
+            </form>
+        </div>
+        <script>
+            var evictiondata;
+            evictiondata = <%- JSON.stringify(evictiondata) %>;
+        </script>
+        <label id="tableMessage"><label>
+        <div id="evictionsearchResult">
+
+            <% if(evictiondata) { %>
+            <table class="" id="dataTable">
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th>State</th>
+                    <th>Year</th>
+                    <th>Population</th>
+                    <th>Poverty rate</th>
+                    <th>Median Gross Rent</th>
+                    <th>Median Household Income</th>
+                    <th>Median Property Value</th>
+                    <th>Rent Burden</th>
+                    <th></th>
+                </tr>
+                <% for (var i = 0; i < evictiondata.length; i++) {
+                    var docId = evictiondata[i]._id.toString();
+
+                %>
+                <tr>
+                    <td><button class="actionButton" id="<%=docId%>" onclick="showEntry(this.id)"><i class="material-icons">open_in_browser</i></button></td>
+                    <td><button class="actionButton" id="<%=docId%>" onclick="updateEntry(this.id)"><i class="material-icons">border_color</i></button></td>
+                    <td class="">
+                        <%= evictiondata[i].name %>
+                    </td>
+                    <td class="" name="">
+                        <%= evictiondata[i].year %>
+                    </td>
+                    <td class="" name="">
+                        <%= evictiondata[i].population %>
+                    </td>
+                    <td class="">
+                        <%= evictiondata[i]['poverty-rate'] %>
+                    </td>
+                    <td class="">
+                        <%= evictiondata[i]['median-gross-rent'] %>
+                    </td>
+                    <td class="">
+                        <%= evictiondata[i]['median-household-income'] %>
+                    </td>
+                    <td class="">
+                        <%= evictiondata[i]['median-property-value'] %>
+                    </td>
+                    <td class="">
+                        <%= evictiondata[i]['rent-burden'] %>
+                    </td>
+                    <td><button class="actionButton" id="<%=docId%>" onclick="deleteEntry(this.id)"><i class="material-icons">cancel</i></button></td>
+                </tr>
+                <% } %>
+            </table>
+
+            <% } %>
+        </div>
+
+    </div>
+    <div class="forms populateData">
+        <span class="title">Populate database</span>
+        <div class="leftside" id="csvfileUpload">
+            <form method="post" enctype="multipart/form-data" action="/admin/add">
+                <h4 for="csvfile">Please Upload a file to populate the Database. (.xlxs)</h4>
+
+                <input type="file" name="csvfile" id="csvfile"><br>
+                <br/>
+                <button type="submit" class="okButton">Submit</button>
+                <label class="msg"><%= message %></label>
+                <label class="err"><%= error %></label>
+            </form>
+
+            <form method="post" enctype="multipart/form-data" action="/admin/addUSData">
+                <h4 for="csvfile">Please upload a file for dashboard</h4>
+
+                <input type="file" name="USDatafile" id="USDatafile"><br>
+                <br/>
+                <button type="submit" class="okButton">Submit</button>
+                <label class="msg"><%= message %></label>
+                <label class="err"><%= error %></label>
+            </form>
+        </div>
+        <div class="rightside">
+            <form class="UserForm" method="get" action="/admin/searchuser">
+                <h4>Please enter User's Email ID to search</h4>
+                <div class="">
+                    <label for="tags">Search: </label>
+                    <input id="tags" class="searchuser" name="user"><br/>
+                    <button id="searchUser" class="okButton" type="submit">Submit</button>
+                    <br/>
+                    <label class="err"><%= errorMsg %></label>
+                </div>
+            </form>
+            <script>
+                var userdata;
+                userdata = <%- JSON.stringify(userdata) %>;
+            </script>
+            <% if(userdata) { %>
+            <% for (var i = 0; i < userdata.length; i++) {
+                var username = userdata[i].email;
+            %>
+            <div id="searchResult">
+                <div class="userRecord">
+                                        <span class="userName">
+                            <%= userdata[i].userName %>
+                        </span>
+                    <span class="email" name="email">
+                            <%= userdata[i].email %>
+                        </span>
+                    <span class="phone">
+                            <%= userdata[i].phone %>
+                        </span>
+                    <span class="delB">
+                            <button class="delete" id="Delete" onclick="deleteuser(event)">Delete</button>
+                        </span>
+                    <span class="editB">
+                            <button class="edit" id="Edit" onclick="edituser(event)">Edit</button>
+                        </span>
+                </div>
+            </div>
+            <% } %>
+            <% } %>
+            <div id="editContainer">
+                <div class="inputFields">
+                    <label class="feildName">Email: </label>
+                    <input id="editemail" class="email" name="email" type="text" disabled/>
+                    <label class="error" id="userNameError"></label>
+                </div>
+                <div class="inputFields">
+                    <label class="feildName">Name: </label>
+                    <input id="editname" class="name" name="userName" type="text"/>
+                    <label class="error" id="userNameError"></label>
+                </div>
+                <div class="inputFields">
+                    <label class="feildName">Phone:</label>
+                    <input id="editNumber" class="phone" name="phone" type="text"/>
+                    <label class="error" id="phoneError"></label>
+                </div>
+                <div class="inputFields">
+                    <button class="update okButton" id="Update" onclick="updateuser(event)">Update</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+<% include footer %>
+</body>

@@ -1,0 +1,56 @@
+<html lang="en-us">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>Login to EvictionLand</title>
+        <link rel="stylesheet" href="/stylesheets/form.css">
+        <link rel="stylesheet" href="/stylesheets/header.css">
+        <script src="/javascripts/domModify.js"></script>
+        <script src="/javascripts/loginValidations.js"></script>
+        <script src="/external/jquery/jquery.js"></script>
+        <script src="/javascripts/jquery-ui.js"></script>
+    </head>
+
+    <body onload=headerModification()>
+
+        <div class="header">
+            <nav>
+                <ul id="navList">
+                    <li><span>EvictionLand</span></li>
+                    <li><a href='/users/signup'>SignUp</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="loginForm">
+            <div class="message"><label><%=message %></label></div>
+            <div class="textBox">
+                SignIn
+            </div>
+            <form name="loginForm" action="/users/handleSignin" onsubmit="return validateLoginForm()" method="post">
+                <div class="inputFields">
+                    <label class="feildName">Email: </label>
+                    <input class="email" name="email" type="email" />
+                    <label class="error" id="emailError"></label>
+                </div>
+
+                <div class="inputFields">
+                    <label class="feildName">Password: </label>
+                    <input class="password" name="password" type="password" />
+                    <label class="error" id="passwordError"></label>
+                </div>
+                <br>
+                <div class="inputFields">
+                    <input class="okButton" type="submit" value="Submit" />
+                    <input class="clearButton" type="button" value="Clear" onclick="clearForm()" /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="/admin/">SignIn as Admin</a>
+                </div>
+
+                <div class="errorDiv">
+                    <label class="error"><%= error%></label>
+                </div>
+            </form>
+        </div>
+    </body>
+
+</html>

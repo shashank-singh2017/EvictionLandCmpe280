@@ -1,0 +1,79 @@
+<DOCTYPE html>
+    <html lang="en-us">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>Login to EvictionLand</title>
+        <link rel="stylesheet" href="/stylesheets/form.css">
+        <link rel="stylesheet" href="/stylesheets/header.css">
+        <script src="/javascripts/domModify.js"></script>
+        <script src="/javascripts/signupValidations.js"></script>
+    </head>
+
+    <body onload=headerModification()>
+
+        <div class="header">
+            <nav>
+                <ul id="navList">
+                    <li><span>EvictionLand</span></li>
+                    <li><a href="/home">Home</a></li>
+                    <li><a href="/users/login">Login</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="signupForm">
+            <div class="textBox">
+                SignUp
+            </div>
+            <form name="signupForm" action="/users/handleSignup" method="post" onsubmit="return validateSignupForm()">
+                <div class="inputFields">
+                    <label class="feildName">Name: </label>
+                    <input class="name" name="userName" type="text" />
+                    <label class="error" id="userNameError"></label>
+                </div>
+
+                <div class="inputFields">
+                    <label class="feildName">Email:</label>
+                    <input class="email" name="email" type="text" />
+                    <label class="error" id="emailError"></label>
+                </div>
+		<div class="inputFields">
+            <label class="feildName">State:</label>
+            <select class="phone" name="state">
+            <%
+            console.log(states);
+              for(state in states){
+            %>
+              <option value=<%=states[state]%>><%=states[state]%></option>
+              <%
+              }
+
+              %>
+            </select>
+            <label class="error" id="stateError"></label>
+          </div>
+
+                <div class="inputFields">
+                    <label class="feildName">Password:</label>
+                    <input class="password" name="password" type="password" />
+                    <label class="error" id="passwordError"></label>
+                </div>
+
+
+                <div class="inputFields">
+                    <label class="feildName">Phone:</label>
+                    <input class="phone" name="phone" type="text" />
+                    <label class="error" id="phoneError"></label>
+                </div>
+
+                <div class="inputFields">
+                    <input class="okButton" type="submit" value="Submit" />
+                    <input class="clearButton" type="button" onclick="clearForm()" value="Clear" />
+                </div>
+
+            </form>
+        </div>
+    </body>
+
+    </html>

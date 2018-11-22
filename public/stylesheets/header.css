@@ -1,0 +1,35 @@
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 17px 16px;
+    text-decoration: none;
+}
+
+li span {
+    display: block;
+    color:  #e24000;
+    text-align: center;
+    padding: 12px 16px;
+    text-decoration: none;
+    font-weight: 900;
+    font-size: 22px;
+}
+
+/* css for link hover in navigation bar */
+nav ul li a:hover {
+    background-color: white;
+    color: black;
+}

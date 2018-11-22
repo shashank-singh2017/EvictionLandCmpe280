@@ -1,0 +1,73 @@
+.heading {
+    font-size: 18px;
+    font-family: SansSerif;
+    font-weight: 700;
+}
+
+.rankingheading {
+    text-align: center;
+    font-size: 20px;
+    font-family: SansSerif;
+    font-weight: 700;
+    margin-top: 4%;
+
+}
+
+.okButton {
+    font-size: 14px;
+    border: 1px solid;
+    border-color: white;
+    color: white;
+    font-weight: 400;
+    background-color: maroon;
+}
+.stateDropdown {
+    margin-top: 1%;
+}
+
+
+.mytooltip {
+    visibility :  hidden;
+    position:absolute;
+    text-align: center;
+    min-width: 200px;
+    height:auto;
+    background-color: white;
+    border-radius: 10px;
+    color: #787777;
+    padding: 6px 12px;
+    z-index:10;
+    font-size: 20px;
+    border: 1px solid #e24000;
+    white-space: pre;
+}
+
+.graphic {
+  animation-duration: 3s;
+  animation-name: slidein;
+}
+
+@keyframes slidein {
+  from {
+    margin-left: 130%;
+    width: 200%;
+  }
+
+  to {
+    margin-left: 0%;
+    width: 100%;
+  }
+}
+
+.forms {
+  display: inline;
+}
+
+.form1 {
+  float: left;
+  width: 50%;
+}
+.form2 {
+  float: right;
+  width: 50%;
+}

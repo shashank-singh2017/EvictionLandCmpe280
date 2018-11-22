@@ -1,0 +1,91 @@
+body {
+    margin: 0;
+    display: initial;
+}
+
+html {
+    margin: 0;
+    padding: 0;
+}
+
+.okButton, .clearButton, .cancelButton, .adminSign {
+    font-size: 14px;
+    border: 1px solid;
+    border-color: white;
+    color: white;
+    font-weight: 400;
+    background-color: maroon;
+}
+
+.loginForm, .signupForm {
+    margin-left: 40%;
+    padding-top: 5%;
+}
+
+.email, .name, .phone {
+    width: 300px;
+    height: 28px;
+    border: 1px solid;
+    border-radius: 3px;
+}
+
+.password {
+    width: 197px;
+    height: 28px;
+    border: 1px solid;
+    border-radius: 3px;
+}
+
+.inputFields {
+    margin-top: 15px;
+}
+
+.textBox {
+    font-size: 22px;
+    font-family: SansSerif;
+    font-weight: 900;
+    color: maroon;
+}
+
+.feildName {
+    font-weight: 500;
+}
+
+.error{
+    color: red;
+    font-size: small;
+}
+
+.message{
+    color: mediumseagreen;
+    margin-bottom: 20px;
+}
+
+.errorDiv{
+    margin-top: 20px;
+}
+
+.content {
+    width: 500px;
+    margin-left: 35%;
+    margin-top: 40px;
+}
+
+.inpField {
+    height: 30px;
+    width: 250px;
+}
+
+.lab {
+    font-size: 18px;
+    font-weight: 700;
+    margin-right: 20px;
+}
+
+.butt {
+    width: 100px;
+    height: 35px;
+    background-color: maroon;
+    font-size: 14px;
+    font-weight: 900px;
+}

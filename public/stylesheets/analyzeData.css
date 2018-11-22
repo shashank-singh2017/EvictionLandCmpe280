@@ -1,0 +1,61 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+.mainBody {
+    min-height: 400px;
+    margin-top: 50px;
+}
+
+#draggableStates {
+    list-style-type: none;
+    margin: 10px;
+    padding: 0;
+    width: auto;
+    background-color: white;
+}
+
+#draggableStates div {
+    margin: 10px;
+    padding: 10px;
+    float: left;
+    width: 140px;
+    height: auto;
+    min-height: 50px;
+    font-size: 20px;
+    text-align: center;
+    background-color: #e24000;
+    color: white;
+    z-index: 10;
+}
+
+.stateTitle{
+    margin-left: 20px;
+    font-size: 30px;
+}
+
+#droppable{
+    width: 200px;
+    height: 200px;
+    border: 1px solid;
+    margin: 20px;
+    padding: 20px;
+    font-size: 25px;
+}
+
+.stateData {
+    border: 1px solid;
+    margin: 20px;
+    padding: 20px;
+    width: 600px;
+    font-size: 20px;
+}
+
+span.stateDataCounty {
+    min-width: 404px;
+    display: inline-block;
+}
+
+.selectedTitle{
+    color: #9e0505;
+}
