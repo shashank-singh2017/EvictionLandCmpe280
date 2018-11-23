@@ -176,6 +176,7 @@ body {
 
 #line{
     display: inline-block;
+    margin-left: 0px;
 }
 
 .legend {
