@@ -32,23 +32,23 @@
     </div>
     <div class="rankings" style="width: 38%; display: inline-block; vertical-align: top;">
         <div class="stateTitle">
-            <div>State analysis</div>
+            <span class="Charttitle">State analysis</span>
             <div class="circle">#<%= stateData.rank %></div>
-            <div class="state"><%= state %></div>
             <div class="evictionData">
-                <div class="evictionRate"> <%= stateData.evictionRate%></div>
+                <div class="state"><%= state %></div>
+                <div class="evictionRate">Number of Evictions: <%= stateData.evictionRate %></div>
             </div>
         </div>
-        <div id="graphic" class="graphic"></div>
+        <div class="rankingsTop">
+            <span class="Charttitle">Top Evicting States in the United States</span>
+            <div id="graphic" class="graphic"></div>
+        </div>
     </div>
 </div>
 <div>
     <div style="width: 60%; display: inline-block">
         <span class="Charttitle">Eviction analysis for US</span>
         <div id="multiLinechart"></div>
-    </div>
-    <div class="rankings" style="width: 28%; display: inline-block">
-        <div id="graphic" class="graphic"></div>
     </div>
 </div>
 <div>
@@ -584,7 +584,7 @@
         var tooltip = d3.select("#graphic")
             .append("div")
             .attr("class", "mytooltip")
-            .text("custom");
+            .text(" ");
 
         //append rects
         bars.append("rect")
@@ -593,53 +593,54 @@
                 return y(d.county);
             })
             .attr("height", 30)
-            .attr("x", 0)
+            .attr("x", -20)
             .attr("width", function (d) {
                 return x(d.case_numbers);
             })
-            .on("mouseover", function () {
-                return tooltip.style("visibility", "visible");
-            })
-            .on("mousemove", function (d) {
-                return tooltip.style("top",
-                    (d3.event.pageY - 10) + "px").style("left", (d3.event.pageX + 10) + "px")
-                    .text("Rank: " + d.rank + "\nCounty: " + d.county + "\nCase No.: " + d.case_numbers);
-            })
-            .on("mouseout", function () {
-                return tooltip.style("visibility", "hidden");
-            });
+
 
         //add a value label to the right of each bar
         bars.append("text")
             .attr("class", "ranking_name")
             //y position of the label is halfway down the bar
             .attr("y", function (d) {
-                return y(d.county) + y.rangeBand() / 2 + 4;
+                return y(d.county) + y.rangeBand() / 2 - 4;
             })
             //x position is 3 pixels to the right of the bar
             .attr("x", function (d) {
-                return 5;
+                return -10;
             })
             .text(function (d) {
-                return d.county + "   " + d.case_numbers;
+                return d.county;
+            }).on("mouseover", function () {
+                return tooltip.attr("class", "tooltip in");
+            })
+            .on("mousemove", function (d) {
+                return tooltip.style("top",
+                    (d3.event.pageY - 10) + "px").style("left", (d3.event.pageX + 50) + "px")
+                    .text("Number of Evictions: " + d.case_numbers);
+            })
+            .on("mouseout", function () {
+                return tooltip.attr("class", "tooltip out");
             });
+        ;
 
         bars.append("text")
             .attr("class", "ranks")
             //y position of the label is halfway down the bar
             .attr("y", function (d) {
-                return y(d.county) + y.rangeBand() / 2 + 4;
+                return y(d.county) + y.rangeBand() / 2 - 4;
             })
             //x position is 3 pixels to the right of the bar
             .attr("x", function (d) {
-                return -30;
+                return -40;
             })
             .text(function (d) {
                 return d.rank;
             });
     }
 
-    function multilineChart(){
+    function multilineChart() {
 
         var margin = {top: 50, right: 200, bottom: 100, left: 125};
 
@@ -684,7 +685,7 @@
 // Uncomment this to use monotone curve
 //     	.curve(d3.curveMonotoneX);
 
-        d3.csv("/data/nss-ranking.csv", function(error, data) {
+        d3.csv("/data/nss-ranking.csv", function (error, data) {
             if (error) throw error;
 
             var parsedData = [];
@@ -761,7 +762,10 @@
                 .data(parsedData)
                 .enter().append("path")
                 .attr("class", "rank-line")
-                .attr("d", function(d) { d.line = this; return line(d.ranks)})
+                .attr("d", function (d) {
+                    d.line = this;
+                    return line(d.ranks)
+                })
                 .attr("clip-path", "url(#clip)")
                 .style("stroke", d => colour(d.department))
                 .style("stroke-width", cfg.strokeWidth)
@@ -818,7 +822,9 @@
             voronoiGroup.selectAll("path")
                 .data(voronoi.polygons(d3.merge(parsedData.map(d => d.ranks))))
                 .enter().append("path")
-                .attr("d", function(d) { return d ? "M" + d.join("L") + "Z" : null; })
+                .attr("d", function (d) {
+                    return d ? "M" + d.join("L") + "Z" : null;
+                })
                 .on("mouseover", mouseover)
                 .on("mouseout", mouseout);
 

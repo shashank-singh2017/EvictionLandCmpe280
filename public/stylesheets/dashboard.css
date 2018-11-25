@@ -254,7 +254,6 @@ span.BP {
 }
 
 text {
-    text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, 0 -1px 0 #fff, -1px 0 0 #fff;
     font-family: 'Open Sans', sans-serif;
     opacity: 0.7;
     font-size: 18px;
@@ -307,7 +306,35 @@ text {
 .stateTitle .state{
     font-size: 50px;
     text-align: center;
-    margin: 0px 0 20px 20px;
+
     display: inline-block;
     vertical-align: top;
+}
+
+.evictionData {
+    display: inline-block;
+    margin: 0px 0 20px 20px;
+}
+
+.tooltip.in{
+    font-size: 15px;
+    margin-top: -10px;
+    margin-left: 40px;
+    background-color: lightyellow;
+    padding: 15px;
+    width: 215px;
+    border: 1px solid;
+    border-radius: 30px;
+    visibility: visible;
+}
+
+.tooltip.out{
+    visibility: hidden;
+}
+
+.rankingsTop {
+    border: 1px solid black;
+    margin-top: 10px;
+    padding-top: 20px;
+    height: 280px;
 }
