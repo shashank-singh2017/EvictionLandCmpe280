@@ -20,8 +20,8 @@
       <file leaf-file-name="dashboard.ejs" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/views/dashboard.ejs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="147">
-              <caret line="34" column="17" lean-forward="false" selection-start-line="34" selection-start-column="17" selection-end-line="34" selection-end-column="17" />
+            <state relative-caret-position="583">
+              <caret line="639" column="58" lean-forward="false" selection-start-line="639" selection-start-column="58" selection-end-line="639" selection-end-column="58" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -29,12 +29,12 @@
                 <element signature="n#style#0;n#div#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#1;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="e#2477#3659#0#HTML" expanded="false" />
-                <element signature="e#4247#7896#0#HTML" expanded="false" />
-                <element signature="e#7940#11572#0#HTML" expanded="false" />
-                <element signature="e#11615#16012#0#HTML" expanded="false" />
-                <element signature="e#16042#19121#0#HTML" expanded="false" />
-                <element signature="e#19158#19672#0#HTML" expanded="false" />
-                <element signature="e#22685#31158#0#HTML" expanded="false" />
+                <element signature="e#4389#8038#0#HTML" expanded="false" />
+                <element signature="e#8082#11714#0#HTML" expanded="false" />
+                <element signature="e#11757#16154#0#HTML" expanded="false" />
+                <element signature="e#16184#19263#0#HTML" expanded="false" />
+                <element signature="e#19300#19814#0#HTML" expanded="false" />
+                <element signature="e#22994#31467#0#HTML" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -53,8 +53,8 @@
       <file leaf-file-name="dashboard.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/stylesheets/dashboard.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="610">
-              <caret line="338" column="14" lean-forward="false" selection-start-line="338" selection-start-column="14" selection-end-line="338" selection-end-column="14" />
+            <state relative-caret-position="358">
+              <caret line="327" column="24" lean-forward="true" selection-start-line="327" selection-start-column="24" selection-end-line="327" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -93,7 +93,7 @@
       <file leaf-file-name="dashboard.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/controllers/dashboard.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="218">
+            <state relative-caret-position="533">
               <caret line="77" column="40" lean-forward="false" selection-start-line="77" selection-start-column="28" selection-end-line="77" selection-end-column="40" />
               <folding />
             </state>
@@ -242,12 +242,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1542925000507</updated>
-      <workItem from="1542925001798" duration="20628000" />
+      <workItem from="1542925001798" duration="22287000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="20628000" />
+    <option name="totallyTimeSpent" value="22287000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
@@ -389,7 +389,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/controllers/dashboard.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="218">
+        <state relative-caret-position="533">
           <caret line="77" column="40" lean-forward="false" selection-start-line="77" selection-start-column="28" selection-end-line="77" selection-end-column="40" />
           <folding />
         </state>
@@ -397,16 +397,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/stylesheets/dashboard.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="610">
-          <caret line="338" column="14" lean-forward="false" selection-start-line="338" selection-start-column="14" selection-end-line="338" selection-end-column="14" />
+        <state relative-caret-position="358">
+          <caret line="327" column="24" lean-forward="true" selection-start-line="327" selection-start-column="24" selection-end-line="327" selection-end-column="24" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/views/dashboard.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="34" column="17" lean-forward="false" selection-start-line="34" selection-start-column="17" selection-end-line="34" selection-end-column="17" />
+        <state relative-caret-position="583">
+          <caret line="639" column="58" lean-forward="false" selection-start-line="639" selection-start-column="58" selection-end-line="639" selection-end-column="58" />
           <folding>
             <element signature="n#style#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -414,12 +414,12 @@
             <element signature="n#style#0;n#div#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#1;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="e#2477#3659#0#HTML" expanded="false" />
-            <element signature="e#4247#7896#0#HTML" expanded="false" />
-            <element signature="e#7940#11572#0#HTML" expanded="false" />
-            <element signature="e#11615#16012#0#HTML" expanded="false" />
-            <element signature="e#16042#19121#0#HTML" expanded="false" />
-            <element signature="e#19158#19672#0#HTML" expanded="false" />
-            <element signature="e#22685#31158#0#HTML" expanded="false" />
+            <element signature="e#4389#8038#0#HTML" expanded="false" />
+            <element signature="e#8082#11714#0#HTML" expanded="false" />
+            <element signature="e#11757#16154#0#HTML" expanded="false" />
+            <element signature="e#16184#19263#0#HTML" expanded="false" />
+            <element signature="e#19300#19814#0#HTML" expanded="false" />
+            <element signature="e#22994#31467#0#HTML" expanded="false" />
           </folding>
         </state>
       </provider>

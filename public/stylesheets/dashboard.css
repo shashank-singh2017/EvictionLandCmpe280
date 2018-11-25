@@ -338,3 +338,8 @@ text {
     padding-top: 20px;
     height: 280px;
 }
+
+rect.bar.firstBar {
+    fill: orange;
+    /* color: white; */
+}

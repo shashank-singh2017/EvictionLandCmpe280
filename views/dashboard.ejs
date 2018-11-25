@@ -104,9 +104,11 @@
     addMap(mapDataForState, selectedState);
     addLine(yearDataForState);
     addRentBurdenLineGraph(yearRentData);
+    rankingData.push({"rank": <%=stateData.rank %>,
+        "county": "<%= state %>",
+        "case_numbers": <%= stateData.evictionRate %>});
     rankings(rankingData);
     multilineChart();
-
     //callPieChart(poverty);
 
     function addLine(data) {
@@ -547,6 +549,7 @@
         pieChart(data1);
     }
 
+
     function rankings(data) {
         var margin = {
             top: 20,
@@ -588,7 +591,6 @@
 
         //append rects
         bars.append("rect")
-            .attr("class", "bar")
             .attr("y", function (d) {
                 return y(d.county);
             })
@@ -597,6 +599,12 @@
             .attr("width", function (d) {
                 return x(d.case_numbers);
             })
+            .attr("class", function (d) {
+                if(d.county == selectedState)
+                    return "bar firstBar"
+                else
+                    return "bar"
+            })
 
 
         //add a value label to the right of each bar
@@ -604,7 +612,7 @@
             .attr("class", "ranking_name")
             //y position of the label is halfway down the bar
             .attr("y", function (d) {
-                return y(d.county) + y.rangeBand() / 2 - 4;
+                return y(d.county) + y.rangeBand() / 2 + 1;
             })
             //x position is 3 pixels to the right of the bar
             .attr("x", function (d) {
@@ -629,7 +637,7 @@
             .attr("class", "ranks")
             //y position of the label is halfway down the bar
             .attr("y", function (d) {
-                return y(d.county) + y.rangeBand() / 2 - 4;
+                return y(d.county) + y.rangeBand() / 2 + 1;
             })
             //x position is 3 pixels to the right of the bar
             .attr("x", function (d) {
@@ -638,6 +646,7 @@
             .text(function (d) {
                 return d.rank;
             });
+
     }
 
     function multilineChart() {
