@@ -56,10 +56,10 @@ module.exports.fetchDataByState = function (req, res) {
             }
 
             var statesJsonArray = xlsx.utils.sheet_to_json(states);
-            const cases = db.get('reportedCases');
+            const rankings = db.get('reportedCases');
             var rankingsJsonArray = [];
 
-            cases.find({}, {sort: {State_Reported_Cases: -1}, limit:3}).then((results)=>{
+            rankings.find({}, {sort: {State_Reported_Cases: -1}, limit:3}).then((results)=>{
                 for(var i= 0; i < results.length; i++){
                     rankingsJsonArray.push({
                         rank: i+1,
@@ -68,14 +68,30 @@ module.exports.fetchDataByState = function (req, res) {
                         case_numbers: results[i].case_numbers
                     });
                 }
-                res.render('../views/dashboard', {
-                    'rankings':rankingsJsonArray,
-                    'mapData': dataJsonArray,
-                    'yearData': dataAllYearsOfState,
-                    'state': selectedState,
-                    'rentBurden': rentBurdenAllYears,
-                    'poverty': poverty
+
+                var rank = 0;
+                var evictionRate = 0;
+                cases.find({"year": 2016}, {sort : {evictions : -1}}).then((results2)=>{
+                    for(var i= 0; i < results2.length; i++){
+                        if( results2[i].name == selectedState){
+                            rank = i ;
+                            evictionRate = results2[i].evictions;
+                        }
+                    }
+                    res.render('../views/dashboard', {
+                        'rankings':rankingsJsonArray,
+                        'mapData': dataJsonArray,
+                        'yearData': dataAllYearsOfState,
+                        'state': selectedState,
+                        'rentBurden': rentBurdenAllYears,
+                        'poverty': poverty,
+                        'stateData' : {
+                            'rank':rank,
+                            'evictionRate' : evictionRate
+                        }
+                    });
                 });
+
             });
         });
 
