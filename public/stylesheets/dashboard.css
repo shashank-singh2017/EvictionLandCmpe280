@@ -219,11 +219,8 @@ span.BP {
     fill: #D1BCD6;
 }
 
-#multiLinechart {
 
-}
-
-.x-axis path, .y-axis path {
+#graphic .x-axis path,#graphic .y-axis path {
     display: none;
 }
 
@@ -244,16 +241,16 @@ span.BP {
     fill: black;
 }
 
-.x-axis text {
+#graphic .x-axis text {
     font-size: 20px;
     font-weight: 700;
 }
 
-.y-axis text {
+#graphic .y-axis text {
     font-weight: 700;
 }
 
-text {
+#graphic text {
     font-family: 'Open Sans', sans-serif;
     opacity: 0.7;
     font-size: 18px;
@@ -343,3 +340,19 @@ rect.bar.firstBar {
     fill: orange;
     /* color: white; */
 }
+
+#multiLinechart .axis path,
+#multiLinechart .axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+}
+
+#multiLinechart .x.axis path {
+    display: none;
+}
+
+#multiLinechart {
+    margin-top: 50px;
+}
+
