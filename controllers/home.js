@@ -41,3 +41,7 @@ module.exports.divya = function(req,res) {
 module.exports.pavana = function(req,res) {
     res.render('../views/pavana');
 };
+
+module.exports.dashboardtest = function(req,res) {
+    res.render('../views/dashboardtest');
+}

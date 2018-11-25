@@ -21,4 +21,6 @@ router.get('/divya', mainController.divya);
 
 router.get('/pavana', mainController.pavana);
 
+router.get('/dashboardtest', mainController.dashboardtest);
+
 module.exports = router;
