@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>US Map</title>
+    <!--<link rel="stylesheet" href="/stylesheets/bootstrap.min.css">-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" >
+    <link rel="stylesheet" href="/stylesheets/map.css">
+    <link rel="stylesheet" href="/stylesheets/analyzeData.css">
+    <script src="/javascripts/raphael.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>
+    <script src="/javascripts/color.jquery.js"></script>
+    <script src="/javascripts/jquery.usmap.js"></script>
+    <script src="/javascripts/domModify.js"></script>
+
+    <script>
+        $(document).ready(function() {
+               $('#map').usmap({
+                'click' : function(event, selected) {
+                    $('#alert')
+                        .text('Selected state: '+selected.name)
+                        .stop()
+                        .css('backgroundColor', '#f90')
+                        .animate({backgroundColor: '#dd8'}, 1000);
+
+                    const Url ="http://localhost:3000/analyzeData/county?selectedState="+selected.name;
+                    $.ajax({url : Url, success: function (res) {
+                            var html ="";
+                            for (var i = 1; i< res.data.length; i++) {
+                                html += ' <div class="stateNames ui-widget-content">' +
+                                    '<span class="stateDataCounty">'+res.data[i].county+'</span>' +
+                                    '<span class="stateDataCase">'+res.data[i].case_numbers+'</span>' +
+                                    '</div>';
+                            }
+                            $('#responseStateData').html(html);
+                        }});
+                    var nodelist = document.getElementById("result").childNodes.length;
+                    if (nodelist < 3) {
+                        var header = document.createElement('h3');
+                        header.className='card-header';
+                        var txt = document.createTextNode(selected.name);
+                        header.appendChild(txt);
+
+                        var bodydiv = document.createElement('div');
+                        bodydiv.className = 'card-body';
+                        var h3 = document.createElement('h4');
+                        var txt2 = document.createTextNode("Statistics goes here");
+                        h3.appendChild(txt2);
+                        bodydiv.appendChild(h3);
+
+                        var element = document.createElement("div");
+                        element.className = 'card col-sm-4 col-6';
+                        element.appendChild(header);
+                        element.appendChild(bodydiv);
+
+                        var res = document.getElementById("result");
+                        res.appendChild(element);
+                    } else  {
+                        var element = document.createElement('div');
+                        element.className='alert alert-info';
+                        var txt = document.createTextNode('You can only select 3 states. Reload the page to change selection');
+                        element.appendChild(txt);
+                        if( document.getElementById('alert2').hasChildNodes()) {
+                            document.getElementById('alert2')
+                                .replaceChild(document.getElementById('alert2').childNodes[0], element);
+                        }
+                        else {
+                            document.getElementById('alert2').appendChild(element);
+                        }
+                    }
+
+                }
+            });
+        });
+    </script>
+
+</head>
+
+<body onload=headerModification()>
+<% include header %>
+<div id="alert">Selected State: </div>
+<div id="refresh">
+    <button type="button" class="btn btn-link btn-lg" onClick="window.location.reload();">
+        <span class="glyphicon glyphicon-refresh">Refresh</span>
+    </button>
+</div>
+<div id="map"></div>
+
+<div id="alert2" class="alert2"></div>
+<div class="container">
+<!--<div  class="row">-->
+    <div class="card-deck-wrapper">
+        <div id="result" class="card-deck"></div>
+    </div>
+<!--</div>-->
+</div>
+
+<% include footer%>
+</body>
+
+</html>
