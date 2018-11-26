@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset=utf-8 />
+    <title>Multiple choropleth maps</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.js'></script>
+    <link href='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.css' rel='stylesheet' />
+    <script src="/javascripts/leaflet-bubble.js"></script>
+    <link href="/stylesheets/nv.d3.min.css">
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <link rel="stylesheet" href="/stylesheets/dashboard.css">
+
+
+    <style>
+        body { margin:0; padding:0; }
+        #map { position:absolute; top:40px; bottom:0; width:70%; height:50%; margin-left: 80px}
+    </style>
+</head>
+<body>
+<style>
+    .menu-ui {
+        position:absolute;
+        top:10px;
+        right:10px;
+    }
+
+    path {
+        -webkit-transition:fill 200ms;
+        transition:fill 200ms;
+    }
+</style>
+
+<div id='map'></div>
+<div id='variables' class='menu-ui'></div>
+<div style="margin-top: 600px;display: inline-block">
+    <span class="Charttitle">Number of evictions analysis from 2000 to 2016</span>
+    <div id="line">
+        <svg width="400" height="250"></svg>
+    </div>
+</div>
+
+<div style="margin-top: 600px;display: inline-block">
+    <span class="Charttitle">analysis from 2000 to 2016 </span>
+    <div id="lineprop">
+        <svg width="400" height="250"></svg>
+    </div>
+</div>
+
+<!-- jQuery is required for this example. -->
+<script src='https://code.jquery.com/jquery-1.11.0.min.js'></script>
+<script>
+    L.mapbox.accessToken = 'pk.eyJ1IjoiYXJzaDkxIiwiYSI6ImNqb3czMXp5OTFkYmwzcW80Z2piaXdzZDYifQ.6aoeMcWeMNmDku-1oI_gvQ';
+    var map = L.mapbox.map('map', 'mapbox.light')
+        .setView([40, -96], 4);
+
+    var bubbles;
+    var state = "New York";
+    var hues = [
+        '#eff3ff',
+        '#bdd7e7',
+        '#6baed6',
+        '#3182bd',
+        '#08519c'];
+
+    var variables = [
+        'population',
+        'poverty-rate',
+        'pct-renter-occupied',
+        'median-gross-rent',
+        'median-property-value',
+        'rent-burden'
+    ];
+
+    // Collect the range of each variable over the full set, so
+    // we know what to color the brightest or darkest.
+    var ranges = {};
+    var $select = $('<select id="drop"></select>')
+        .appendTo($('#variables'))
+        .on('change', function() {
+            setVariable($(this).val());
+            searchEviction(state, $(this).val());
+        });
+
+    for (var i = 0; i < variables.length; i++) {
+        ranges[variables[i]] = { min: Infinity, max: -Infinity };
+        $('<option></option>')
+            .text(variables[i])
+            .attr('value', variables[i])
+            .appendTo($select);
+    }
+
+    var evictionJSON = <%- JSON.stringify(evictionGeoJSON) %>;
+    var usdataJSON = <%- JSON.stringify(usData) %>;
+    var yearDataForState = <%- JSON.stringify(trendLine)%>
+    var propData = <%- JSON.stringify(propLine)%>
+    var selectedProp = $("#drop").val();
+
+    bubbleData(evictionJSON);
+    addLine(yearDataForState);
+    addLineProp(propData, selectedProp);
+
+    // Create a layer of state features, and when it's done
+    // loading, run loadData
+    var usLayer = L.mapbox.featureLayer()
+        .loadURL('/data/us.geojson')
+        .addTo(map)
+        .on('ready', loadData);
+
+    usLayer.on('click',(event)=>{
+        var layer = event.layer;
+        state = layer.feature.properties.name;
+        searchEviction(state, selectedProp);
+        // layer.setStyle({
+        //     weight: 5,
+        //     color: '#666',
+        //     dashArray: '',
+        //     fillOpacity: 0.7
+        // });
+    })
+
+    function loadData() {
+        joinData(usdataJSON, usLayer);
+    }
+
+    function joinData(data, layer) {
+        var usGeoJSON = usLayer.getGeoJSON(),
+            byState = {};
+
+        for (var i = 0; i < usGeoJSON.features.length; i++) {
+            byState[usGeoJSON.features[i].properties.name] =
+                usGeoJSON.features[i];
+        }
+        for (i = 0; i < data.length; i++) {
+            // Match the GeoJSON data (byState) with the tabular data
+            // (data), replacing the GeoJSON feature properties
+            // with the full data.
+            byState[data[i].name].properties = data[i];
+            for (var j = 0; j < variables.length; j++) {
+                // Simultaneously build the table of min and max
+                // values for each attribute.
+                var n = variables[j];
+                ranges[n].min = Math.min(data[i][n], ranges[n].min);
+                ranges[n].max = Math.max(data[i][n], ranges[n].max);
+            }
+        }
+
+        var newFeatures = [];
+        for (i in byState) {
+            newFeatures.push(byState[i]);
+        }
+
+        usLayer.setGeoJSON(newFeatures);
+        setVariable(variables[0]);
+    }
+
+    function searchEviction(state, prop) {
+        const Url = "http://localhost:3000/stateAnalysis/showEvictionByState";
+
+        if (state) {
+            $.ajax({
+                type: "GET",
+                url: Url,
+                data: {
+                    state: state,
+                    property: prop
+                },
+                success: function (res) {
+                    yearDataForState = (res.trendLine)
+                    propData = (res.propLine)
+                    addLine(yearDataForState);
+                    addLineProp(propData, prop);
+
+                }
+            });
+        }
+    }
+
+    function setVariable(name) {
+        var scale = ranges[name];
+        usLayer.eachLayer(function(layer) {
+            // Decide the color for each state by finding its
+            // place between min & max, and choosing a particular
+            // color as index.
+            var division = Math.floor(
+                (hues.length - 1) *
+                ((layer.feature.properties[name] - scale.min) /
+                    (scale.max - scale.min)));
+
+            layer.setStyle({
+                fillColor: hues[division],
+                fillOpacity: 0.8,
+                weight: 0.5
+            });
+        });
+
+        usLayer.bringToBack();
+    }
+
+    function bubbleData(data){
+        bubbles = L.bubbleLayer(data, {
+            property: 'eviction-filings',
+            legend: true,
+            max_radius : 40,
+            scale: chroma.brewer.OrRd,
+            tooltip : true,
+            style: { weight: 1, opacity: 1, fillOpacity: 1 }
+        })
+
+        bubbles.addTo(map);
+    }
+
+    function addLine(data) {
+        d3.select("#line svg").remove();
+        var svg = d3.select("#line").append("svg").attr("width",400).attr("height",250);
+        var margin = {
+                top: 20,
+                right: 20,
+                bottom: 30,
+                left: 40
+            };
+        var width = +svg.attr("width") - margin.left - margin.right;
+        var height = +svg.attr("height") - margin.top - margin.bottom;
+
+        var parseTime = d3.timeParse("%Y")
+        bisectDate = d3.bisector(function (d) {
+            return d.year;
+        }).left;
+
+        var x = d3.scaleTime().range([0, width]);
+        var y = d3.scaleLinear().range([height, 0]);
+
+        var line = d3.line()
+            .x(function (d) {
+                return x(d.year);
+            })
+            .y(function (d) {
+                return y(d.value);
+            });
+
+        var g = svg.append("g")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
+        data.forEach(function (d) {
+            d.year = parseTime(d.year);
+            d.value = +d.value;
+        });
+
+        x.domain(d3.extent(data, function (d) {
+            return d.year;
+        }));
+        y.domain([d3.min(data, function (d) {
+            return d.value;
+        }) / 1.005, d3.max(data, function (d) {
+            return d.value;
+        }) * 1.005]);
+
+        g.append("g")
+            .attr("class", "axis axis--x")
+            .attr("transform", "translate(0," + height + ")")
+            .call(d3.axisBottom(x));
+
+        g.append("g")
+            .attr("class", "axis axis--y")
+            .call(d3.axisLeft(y).ticks(6).tickFormat(function (d) {
+                return parseInt(d / 1000) + "k";
+            }))
+            .append("text")
+            .attr("class", "axis-title")
+            .attr("transform", "rotate(-90)")
+            .attr("y", 6)
+            .attr("dy", ".71em")
+            .style("text-anchor", "end")
+            .attr("fill", "#5D6971")
+            .text("Filed Evictions");
+
+        g.append("path")
+            .datum(data)
+            .attr("class", "line")
+            .attr("d", line);
+
+        var focus = g.append("g")
+            .attr("class", "focus")
+            .style("display", "none");
+
+        focus.append("line")
+            .attr("class", "x-hover-line hover-line")
+            .attr("y1", 0)
+            .attr("y2", height);
+
+        focus.append("line")
+            .attr("class", "y-hover-line hover-line")
+            .attr("x1", width)
+            .attr("x2", width);
+
+        focus.append("circle")
+            .attr("r", 7.5);
+
+        focus.append("text")
+            .attr("x", 15)
+            .attr("dy", ".31em");
+
+        svg.append("rect")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+            .attr("class", "overlay")
+            .attr("width", width)
+            .attr("height", height)
+            .on("mouseover", function () {
+                focus.style("display", null);
+            })
+            .on("mouseout", function () {
+                focus.style("display", "none");
+            })
+            .on("mousemove", mousemove);
+
+        function mousemove() {
+            var x0 = x.invert(d3.mouse(this)[0]),
+                i = bisectDate(data, x0, 1),
+                d0 = data[i - 1],
+                d1 = data[i],
+                d = x0 - d0.year > d1.year - x0 ? d1 : d0;
+            focus.attr("transform", "translate(" + x(d.year) + "," + y(d.value) + ")");
+            focus.select("text").text(function () {
+                return d.value;
+            });
+            focus.select(".x-hover-line").attr("y2", height - y(d.value));
+            focus.select(".y-hover-line").attr("x2", width + width);
+        }
+
+    }
+
+    function addLineProp(data, prop) {
+        d3.select("#lineprop svg").remove();
+        var svg = d3.select("#lineprop").append("svg").attr("width",400).attr("height",250);
+        var margin = {
+            top: 20,
+            right: 20,
+            bottom: 30,
+            left: 40
+        };
+        var width = +svg.attr("width") - margin.left - margin.right;
+        var height = +svg.attr("height") - margin.top - margin.bottom;
+
+        var parseTime = d3.timeParse("%Y")
+        bisectDate = d3.bisector(function (d) {
+            return d.year;
+        }).left;
+
+        var x = d3.scaleTime().range([0, width]);
+        var y = d3.scaleLinear().range([height, 0]);
+
+        var line = d3.line()
+            .x(function (d) {
+                return x(d.year);
+            })
+            .y(function (d) {
+                return y(d.value);
+            });
+
+        var g = svg.append("g")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
+        data.forEach(function (d) {
+            d.year = parseTime(d.year);
+            d.value = +d.value;
+        });
+
+        x.domain(d3.extent(data, function (d) {
+            return d.year;
+        }));
+        y.domain([d3.min(data, function (d) {
+            return d.value;
+        }) / 1.005, d3.max(data, function (d) {
+            return d.value;
+        }) * 1.005]);
+
+        g.append("g")
+            .attr("class", "axis axis--x")
+            .attr("transform", "translate(0," + height + ")")
+            .call(d3.axisBottom(x));
+
+        g.append("g")
+            .attr("class", "axis axis--y")
+            .call(d3.axisLeft(y).ticks(6).tickFormat(function (d) {
+                return parseInt(d / 1000) + "k";
+            }))
+            .append("text")
+            .attr("class", "axis-title")
+            .attr("transform", "rotate(-90)")
+            .attr("y", 6)
+            .attr("dy", ".71em")
+            .style("text-anchor", "end")
+            .attr("fill", "#5D6971")
+            .text(prop);
+
+        g.append("path")
+            .datum(data)
+            .attr("class", "line")
+            .attr("d", line);
+
+        var focus = g.append("g")
+            .attr("class", "focus")
+            .style("display", "none");
+
+        focus.append("line")
+            .attr("class", "x-hover-line hover-line")
+            .attr("y1", 0)
+            .attr("y2", height);
+
+        focus.append("line")
+            .attr("class", "y-hover-line hover-line")
+            .attr("x1", width)
+            .attr("x2", width);
+
+        focus.append("circle")
+            .attr("r", 7.5);
+
+        focus.append("text")
+            .attr("x", 15)
+            .attr("dy", ".31em");
+
+        svg.append("rect")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+            .attr("class", "overlay")
+            .attr("width", width)
+            .attr("height", height)
+            .on("mouseover", function () {
+                focus.style("display", null);
+            })
+            .on("mouseout", function () {
+                focus.style("display", "none");
+            })
+            .on("mousemove", mousemove);
+
+        function mousemove() {
+            var x0 = x.invert(d3.mouse(this)[0]),
+                i = bisectDate(data, x0, 1),
+                d0 = data[i - 1],
+                d1 = data[i],
+                d = x0 - d0.year > d1.year - x0 ? d1 : d0;
+            focus.attr("transform", "translate(" + x(d.year) + "," + y(d.value) + ")");
+            focus.select("text").text(function () {
+                return d.value;
+            });
+            focus.select(".x-hover-line").attr("y2", height - y(d.value));
+            focus.select(".y-hover-line").attr("x2", width + width);
+        }
+
+    }
+
+</script>
+</body>
+</html>
