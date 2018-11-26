@@ -1,118 +1,119 @@
 <html lang="en-us">
 
-    <head>
-        <meta charset="UTF-8">
-        <!-- Basic -->
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<head>
+    <meta charset="UTF-8">
+    <!-- Basic -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-        <!-- Mobile Metas -->
-        <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-         <!-- Site Metas -->
-        <meta name="keywords" content="">
-        <meta name="description" content="">
-        <meta name="author" content="">
+    <!-- Site Metas -->
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-        <!-- Site Icons -->
-        <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
-        <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <!-- Site Icons -->
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon"/>
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
 
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="./../stylesheets/bootstrap.min.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="./../stylesheets/bootstrap.min.css">
 
-        <link rel="stylesheet" href="./../stylesheets/font-awesome.min.css">
-        <!-- Site CSS -->
-        <link rel="stylesheet" href="./../stylesheets/style.css">
+    <link rel="stylesheet" href="./../stylesheets/font-awesome.min.css">
+    <!-- Site CSS -->
+    <link rel="stylesheet" href="./../stylesheets/style.css">
 
-        <link rel="stylesheet" href="./../stylesheets/form.css">
-        <!-- Responsive CSS -->
-        <link rel="stylesheet" href="./../stylesheets/responsive.css">
-        <!-- Custom CSS -->
-        <link rel="stylesheet" href="./../stylesheets/custom.css">
-    	<script src="./../javascripts/modernizr.js"></script> <!-- Modernizr -->
+    <link rel="stylesheet" href="./../stylesheets/form.css">
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="./../stylesheets/responsive.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./../stylesheets/custom.css">
+    <script src="./../javascripts/modernizr.js"></script> <!-- Modernizr -->
 
-        <script src="/javascripts/domModify.js"></script>
-        <script src="/javascripts/loginValidations.js"></script>
-        <title>Login to EvictionLand</title>
-    </head>
+    <script src="/javascripts/domModify.js"></script>
+    <script src="/javascripts/loginValidations.js"></script>
+    <title>Login to EvictionLand</title>
+</head>
 
-    <body id="page-top" class="politics_version" style="background-color: #d6dbdb;">
+<body id="page-top" class="politics_version" style="background-color: #d6dbdb;">
 
-        <!-- Navigation -->
+<!-- Navigation -->
 
-        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav" style="background-color: #303636;">
-          <div class="container">
-            <a class="navbar-brand js-scroll-trigger" href="#page-top">
-    			<h2 class="logo">EvictionLand</h2>
-    		</a>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-              <ul class="navbar-nav text-uppercase ml-auto">
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav" style="background-color: #303636;">
+    <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top">
+            <h2 class="logo">EvictionLand</h2>
+        </a>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav text-uppercase ml-auto">
                 <li style="color: black; margin-left: 30px;">
-                  <a class="links" href='/users/signup' style="color:white;">SignUp</a>
+                    <a class="links" href='/users/signup' style="color:white;">SignUp</a>
                 </li>
-              </ul>
-            </div>
-          </div>
-        </nav>
+            </ul>
+        </div>
+    </div>
+</nav>
 
 
-        <section style="margin-top: 90px; height: 77%;">
-            <div class="container">
-                <div class="col-md-5 formBox">
-                        <br/>
-                        <h2 style="font-weight: 900;">SignIn</h2>
+<section style="margin-top: 90px; height: 77%;">
+    <div class="container">
+        <div class="col-md-5 formBox">
+            <br/>
+            <h2 style="font-weight: 900;">SignIn</h2>
 
-                        <form name="loginForm" action="/users/handleSignin" onsubmit="return validateLoginForm()" method="post">
-                            <div class="inputFields">
-                                <label class="feildName">Email: </label>
-                                <input class="email" name="email" type="email" />
-                                <label class="error" id="emailError"></label>
-                            </div>
-
-                            <div class="inputFields">
-                                <label class="feildName">Password: </label>
-                                <input class="password" name="password" type="password" />
-                                <label class="error" id="passwordError"></label>
-                            </div>
-                            <br>
-                            <div class="inputFields">
-                                <input class="btn btn-primary" type="submit" value="Submit" style="background:maroon;"/>
-                                <input class="btn btn-primary" type="button" value="Clear" onclick="clearForm()" style="background:maroon;"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            </div>
-
-                            <div class="errorDiv">
-                                <label class="error"><%= error%></label>
-                            </div>
-                        </form>
+            <form name="loginForm" action="/users/handleSignin" onsubmit="return validateLoginForm()" method="post">
+                <div class="inputFields">
+                    <label class="feildName">Email: </label>
+                    <input class="email" name="email" type="email"/>
+                    <label class="error" id="emailError"></label>
                 </div>
-            </div>
-        </section>
 
-        <div class="copyrights" style="height: 80px;">
-            <div class="container">
-                <div class="footer-distributed" style="float: left;">
-                    <div class="footer-right">
-                        <p class="footer-company-name">All Rights Reserved. &copy; 2018 <a href="#">EvictionLand</a>
-                    </div>
+                <div class="inputFields">
+                    <label class="feildName">Password: </label>
+                    <input class="password" name="password" type="password"/>
+                    <label class="error" id="passwordError"></label>
                 </div>
-            </div><!-- end container -->
-        </div><!-- end copyrights -->
+                <br>
+                <div class="inputFields">
+                    <input class="btn btn-primary" type="submit" value="Submit" style="background:maroon;"/>
+                    <input class="btn btn-primary" type="button" value="Clear" onclick="clearForm()"
+                           style="background:maroon;"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </div>
 
-        <a href="#" id="scroll-to-top" class="dmtop global-radius"><i class="fa fa-angle-up"></i></a>
+                <div class="errorDiv">
+                    <label class="error"><%= error %></label>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
 
-        <!-- ALL JS FILES -->
-        <script src="./../javascripts/all.js"></script>
-        <!-- Camera Slider -->
-        <script src="./../javascripts/jquery.mobile.customized.min.js"></script>
-        <script src="./../javascripts/jquery.easing.1.3.js"></script>
-        <script src="./../javascripts/parallaxie.js"></script>
-        <script src="./../javascripts/headline.js"></script>
-        <!-- Contact form JavaScript -->
-        <script src="./../javascripts/jqBootstrapValidation.js"></script>
-        <!-- <script src="./../javascripts/contact_me.js"></script> -->
-        <!-- ALL PLUGINS -->
-        <!-- <script src="./../javascripts/custom.js"></script> -->
-        <script src="./../javascripts/jquery.vide.js"></script>
-    </body>
+<div class="copyrights" style="height: 80px;">
+    <div class="container">
+        <div class="footer-distributed" style="float: left;">
+            <div class="footer-right">
+                <p class="footer-company-name">All Rights Reserved. &copy; 2018 <a href="#">EvictionLand</a>
+            </div>
+        </div>
+    </div><!-- end container -->
+</div><!-- end copyrights -->
+
+<a href="#" id="scroll-to-top" class="dmtop global-radius"><i class="fa fa-angle-up"></i></a>
+
+<!-- ALL JS FILES -->
+<script src="./../javascripts/all.js"></script>
+<!-- Camera Slider -->
+<script src="./../javascripts/jquery.mobile.customized.min.js"></script>
+<script src="./../javascripts/jquery.easing.1.3.js"></script>
+<script src="./../javascripts/parallaxie.js"></script>
+<script src="./../javascripts/headline.js"></script>
+<!-- Contact form JavaScript -->
+<script src="./../javascripts/jqBootstrapValidation.js"></script>
+<!-- <script src="./../javascripts/contact_me.js"></script> -->
+<!-- ALL PLUGINS -->
+<!-- <script src="./../javascripts/custom.js"></script> -->
+<script src="./../javascripts/jquery.vide.js"></script>
+</body>
 </html>
