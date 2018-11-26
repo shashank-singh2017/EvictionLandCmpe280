@@ -5,7 +5,7 @@ var mainController = require('../controllers/home');
 var usersController = require('../controllers/users');
 
 /* GET home page. */
-router.get('/', usersController.login);
+router.get('/', mainController.home);
 
 router.get('/home', mainController.home);
 

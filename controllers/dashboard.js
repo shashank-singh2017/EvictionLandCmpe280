@@ -17,8 +17,8 @@ module.exports.fetchData = function (req, res) {
 };
 
 module.exports.fetchDataByState = function (req, res) {
-    //const selectedState = req.session.userSession[0].state;
-    const selectedState = "California";
+    const selectedState = req.session.userSession[0].state;
+    //const selectedState = "California";
     console.log(selectedState);
     const cases = db.get('USData');
     var dataJsonArray = [];
