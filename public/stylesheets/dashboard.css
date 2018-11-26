@@ -93,7 +93,6 @@ g.nv-y.nv-axis.nvd3-svg {
 .legend {
     position:absolute;
     left:20px;
-    top:100px;
 }
 
 .axis text {
@@ -180,8 +179,8 @@ body {
 
 #key .legend {
     position: absolute;
-    left: 20px;
-     top: 355px;
+    left: 40px;
+    top: 330px;
 }
 
 span.Charttitle {
@@ -289,9 +288,9 @@ span.BP {
     width: 125px;
     height: 125px;
     border-radius: 50%;
-    font-size: 75px;
+    font-size: 60px;
     color: #fff;
-    line-height: 125px;
+    line-height: 100px;
     text-align: center;
     background: #000;
     display: inline-block;
@@ -359,4 +358,3 @@ rect.bar.firstBar {
 div#rentline {
     margin-top: -50px;
 }
-
