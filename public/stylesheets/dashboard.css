@@ -352,6 +352,11 @@ rect.bar.firstBar {
 }
 
 #multiLinechart {
-    margin-top: 50px;
+    margin-top: -88px;
+    /* top: 18px; */
+}
+
+div#rentline {
+    margin-top: -50px;
 }
 
