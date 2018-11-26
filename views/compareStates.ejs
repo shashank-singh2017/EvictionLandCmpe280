@@ -23,7 +23,7 @@
                         .css('backgroundColor', '#f90')
                         .animate({backgroundColor: '#dd8'}, 1000);
 
-                    const Url ="http://localhost:3000/analyzeData/county?selectedState="+selected.name;
+                    const Url ="http://localhost:3000/compare/statistics/?selectedState="+selected.name;
                     $.ajax({url : Url, success: function (res) {
                             var html ="";
                             for (var i = 1; i< res.data.length; i++) {
@@ -37,19 +37,37 @@
                     var nodelist = document.getElementById("result").childNodes.length;
                     if (nodelist < 3) {
                         var header = document.createElement('h3');
-                        header.className='card-header';
+                        header.className='card-header border border-primary';
                         var txt = document.createTextNode(selected.name);
                         header.appendChild(txt);
 
                         var bodydiv = document.createElement('div');
-                        bodydiv.className = 'card-body';
-                        var h3 = document.createElement('h4');
-                        var txt2 = document.createTextNode("Statistics goes here");
-                        h3.appendChild(txt2);
-                        bodydiv.appendChild(h3);
+                        bodydiv.className = 'card-body border border-primary';
+                        var table = document.createElement('table');
+                        table.className = 'table table-bordered';
+                        const Url ="http://localhost:3000/compare/statistics/?selectedState="+selected.name;
+                        $.ajax({url : Url, success: function (res) {
+                            var data = res.data;
+                            for (var i = 0; i<data.length; i++) {
+                                var row = document.createElement('tr');
+                                var cell1 = document.createElement('td');
+                                var cell2 = document.createElement('td');
+                                cell1.appendChild(document.createTextNode(data[i]['label']));
+                                cell2.appendChild(document.createTextNode(data[i]['value']));
+                                row.appendChild(cell1);
+                                row.appendChild(cell2);
+                                table.appendChild(row);
+                            }
+                        }});
+
+
+                        // var h3 = document.createElement('h4');
+                        // var txt2 = document.createTextNode("Statistics goes here");
+                        // h3.appendChild(txt2);
+                        bodydiv.appendChild(table);
 
                         var element = document.createElement("div");
-                        element.className = 'card col-sm-4 col-6';
+                        element.className = 'card border-primary col-sm-4 col-6 ';
                         element.appendChild(header);
                         element.appendChild(bodydiv);
 
@@ -90,7 +108,7 @@
 <div class="container">
 <!--<div  class="row">-->
     <div class="card-deck-wrapper">
-        <div id="result" class="card-deck"></div>
+        <div id="result" class="card-deck border-primary"></div>
     </div>
 <!--</div>-->
 </div>
