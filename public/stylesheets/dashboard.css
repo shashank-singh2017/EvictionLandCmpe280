@@ -285,8 +285,7 @@ span.BP {
     font-size: 18px;
 }
 
-.circle
-{
+.circle {
     width: 125px;
     height: 125px;
     border-radius: 50%;
@@ -296,6 +295,7 @@ span.BP {
     text-align: center;
     background: #000;
     display: inline-block;
+    vertical-align: top;
 }
 
 .stateTitle .state{
@@ -308,7 +308,8 @@ span.BP {
 
 .evictionData {
     display: inline-block;
-    margin: 0px 0 20px 20px;
+    margin: 0px 0 20px 0px;
+    width: 219px;
 }
 
 .tooltip.in{
