@@ -25,6 +25,7 @@ module.exports.fetchDataByState = function (req, res) {
     var dataAllYearsOfState = [];
     var rentBurdenAllYears = [];
     var stackedChartData = [];
+    var populationVariation = [];
     var poverty = [];
     cases.find({"year": 2016}).then((results) => {
         for (var i = 0; i < results.length; i++) {
@@ -42,7 +43,7 @@ module.exports.fetchDataByState = function (req, res) {
 
                 rentBurdenAllYears.push({
                     year: results1[i].year,
-                    value: results1[i]["rent-burden"]
+                    value: results1[i]["poverty-rate"]
                 });
 
                 poverty.push({
@@ -67,6 +68,32 @@ module.exports.fetchDataByState = function (req, res) {
                     });
                 }
 
+                if(results1[i].year == 2016){
+                    populationVariation.push({
+                        "label" : "White",
+                        "value" : results1[i]["pct-white"]
+                    });
+
+                    populationVariation.push({
+                        "label" : "African American",
+                        "value" : results1[i]["pct-af-am"]
+                    });
+
+                    populationVariation.push({
+                        "label" : "Hispanic/Latinx",
+                        "value" : results1[i]["pct-hispanic"]
+                    });
+
+                    populationVariation.push({
+                        "label" : "Asian",
+                        "value" : results1[i]["pct-asian"]
+                    });
+
+                    populationVariation.push({
+                        "label" : "Other",
+                        "value" : results1[i]["pct-am-ind"] + results1[i]["pct-nh-pi"] + results1[i]["pct-multiple"] + results1[i]["pct-other"]
+                    });
+                }
             }
 
             var statesJsonArray = xlsx.utils.sheet_to_json(states);
@@ -103,7 +130,8 @@ module.exports.fetchDataByState = function (req, res) {
                             'rank': rank,
                             'evictionRate': evictionRate
                         },
-                        'stackedChartData' : stackedChartData
+                        'stackedChartData' : stackedChartData,
+                        'pieChartData' : populationVariation
                     });
                 });
 

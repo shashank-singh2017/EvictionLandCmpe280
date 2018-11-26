@@ -53,7 +53,7 @@
 </div>
 <div>
     <div style="display: inline-block; width: 30%">
-        <span class="Charttitle">Rent Burden Rate analysis for 2000 to 2016</span>
+        <span class="Charttitle">Poverty Rate analysis for 2000 to 2016</span>
         <div id="rentline">
             <svg width="400" height="250"></svg>
         </div>
@@ -62,6 +62,11 @@
         <span class="Charttitle">Number of evictions analysis from 2000 to 2016</span>
         <div id="line">
             <svg width="400" height="250"></svg>
+        </div>
+    </div>
+    <div style="display: inline-block; width: 30%">
+        <span class="Charttitle">Number of evictions analysis from 2000 to 2016</span>
+        <div id="piechart">
         </div>
     </div>
 </div>
@@ -102,6 +107,7 @@
     var poverty = <%- JSON.stringify(poverty) %>;
     var rankingData = <%- JSON.stringify(rankings) %>;
     var stackedChartData = <%- JSON.stringify(stackedChartData) %>
+    var pieChartData = <%- JSON.stringify(pieChartData) %>
     addMap(mapDataForState, selectedState);
     addLine(yearDataForState);
     addRentBurdenLineGraph(yearRentData);
@@ -112,6 +118,7 @@
 
     stackedBarChart(stackedChartData);
     rankings(rankingData);
+    pieChart(pieChartData);
 
     function addLine(data) {
         var svg = d3.select("#line svg"),
@@ -486,50 +493,79 @@
     }
 
     function pieChart(data) {
-        var w = 300,                        //width
-            h = 300,                            //height
+        var w = 400,                        //width
+            h = 400,                            //height
             r = 100,                            //radius
             color = d3.scale.category20b();     //builtin range of colors
 
         var vis = d3.select("#piechart")
-            .append("svg:svg")              //create the SVG element inside the <body>
-            .data([data])                   //associate our data with the document
-            .attr("width", w)           //set the width and height of our visualization (these will be attributes of the <svg> tag
+            .append("svg:svg")
+            .data([data])
+            .attr("width", w)
             .attr("height", h)
-            .append("svg:g")                //make a group to hold our pie chart
-            .attr("transform", "translate(" + r + "," + r + ")")    //move the center of the pie chart from 0, 0 to radius, radius
+            .append("svg:g")
+            .attr("transform", "translate(" + r + "," + r + ")")
 
-        var arc = d3.svg.arc()              //this will create <path> elements for us using arc data
+        var arc = d3.svg.arc()
             .outerRadius(r);
 
-        var pie = d3.layout.pie()           //this will create arc data for us given a list of values
+        var pie = d3.layout.pie()
             .value(function (d) {
                 return d.value;
-            });    //we must tell it out to access the value of each element in our data array
+            });
 
-        var arcs = vis.selectAll("g.slice")     //this selects all <g> elements with class slice (there aren't any yet)
-            .data(pie)                          //associate the generated pie data (an array of arcs, each having startAngle, endAngle and value properties)
-            .enter()                            //this will create <g> elements for every "extra" data element that should be associated with a selection. The result is creating a <g> for every object in the data array
-            .append("svg:g")                //create a group to hold each slice (we will have a <path> and a <text> element associated with each slice)
-            .attr("class", "slice");    //allow us to style things in the slices (like text)
+        var arcs = vis.selectAll("g.slice")
+            .data(pie)
+            .enter()
+            .append("svg:g")
+            .attr("class", "slice");
 
         arcs.append("svg:path")
             .attr("fill", function (d, i) {
                 return color(i);
-            }) //set the color for each slice to be chosen from the color function defined above
-            .attr("d", arc);                                    //this creates the actual SVG path using the associated data (pie) with the arc drawing function
+            })
+            .attr("d", arc)
+            .on("mouseover", function(d, i) {
+            d3.select(this).style("fill", d3.rgb(color(i)).darker(2));
+        })
+            .on("mouseout", function(d,i) {
+                d3.select(this).style("fill", color(i));
+            });;
 
-        arcs.append("svg:text")                                     //add a label to each slice
-            .attr("transform", function (d) {                    //set the label's origin to the center of the arc
-                //we have to make sure to set these before calling arc.centroid
+        arcs.append("svg:text")
+            .attr("transform", function (d) {
                 d.innerRadius = 0;
                 d.outerRadius = r;
-                return "translate(" + arc.centroid(d) + ")";        //this gives us a pair of coordinates like [50, 50]
+                return "translate(" + arc.centroid(d) + ")";
             })
-            .attr("text-anchor", "middle")                          //center the text on it's origin
+            .attr("text-anchor", "middle")
             .text(function (d, i) {
-                return data[i].label;
-            });        //get the label from our original data array
+                return data[i].value;
+            });
+
+        var legend = vis.selectAll(".legend")
+            .data(data.map(function(d) { return d.label; }))
+            .enter().append("g")
+            .attr("class", "legend")
+            .attr("transform", function(d,i) { return "translate(0," + i * 20 + ")"; })
+            .style("opacity","0");
+
+        legend.append("rect")
+            .attr("x", w - 190 )
+            .attr("y", -20)
+            .attr("width", 18)
+            .attr("height", 18)
+            .style("fill", function(d, i) { return color(i); });
+
+        legend.append("text")
+            .attr("x", w - 200 )
+            .attr("y", -10)
+            .attr("dy", ".35em")
+            .style("font-size", "13px")
+            .style("text-anchor", "end")
+            .text(function(d) {return d; });
+
+        legend.transition().duration(500).delay(function(d,i){ return 1300 + 100 * i; }).style("opacity","1");
 
     }
 
@@ -541,14 +577,6 @@
         data.push({"label": BP, "value": BP})
         data.push({"label": AP, "value": AP})
         pieChart(data);
-
-        var len = poverty.length - 1;
-        data1 = [];
-        var BP = poverty[len]["poverty"];
-        var AP = ( 100 - poverty[len]["poverty"]).toFixed(2);
-        data1.push({"label": BP, "value": BP})
-        data1.push({"label": AP, "value": AP})
-        pieChart(data1);
     }
 
     function rankings(data) {
