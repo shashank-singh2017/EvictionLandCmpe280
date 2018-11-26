@@ -11,7 +11,6 @@
     <script src="/javascripts/jquery.usmap.js"></script>
     <script src="/javascripts/domModify.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.2/d3.min.js" charset="utf-8"></script>
-    <link href="/stylesheets/nv.d3.min.css">
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400, 700" rel="stylesheet">
     <!-- Site Icons -->
@@ -30,12 +29,10 @@
     <link rel="stylesheet" href="./../stylesheets/responsive.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="./../stylesheets/custom.css">
-	<script src="./../javascripts/modernizr.js"></script> <!-- Modernizr -->
-
-    <script src="/stylesheets/nv.d3.min.js"></script>
+	<!-- <script src="./../javascripts/modernizr.js"></script>  -->
 </head>
 
-<body id="page-top" class="politics_version" style="background-color: #d6dbdb;">
+<body id="page-top" class="politics_version" style="background-color: white;">
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav" style="background-color: #303636;height: 60px;">
       <div class="container">
         <a class="navbar-brand js-scroll-trigger" href="#page-top">
@@ -64,63 +61,63 @@
         <div class="container-fluid" style="padding-left: 50px;padding-right: 50px;">
             <div class="row">
                 <div class="col-md-6">
-                    <div class="row" style="height: 350px;">
-                        <div class="col-md-5 cards" style="height: 300px;">
+                    <div class="row" style="height: 280px;">
+                        <div class="col-md-4 cards" style="height: 250px;">
                             <!-- state analysis -->
                             <div class="stateTitle">
-                                <span class="Charttitle">State analysis</span>
-                                <div class="circle">#<%= stateData.rank %></div>
-                                <div class="evictionData">
-                                    <div class="state"><%= state %></div>
-                                    <div class="evictionRate">Number of Evictions: <%= stateData.evictionRate %></div>
+                                <div class="Charttitle" style="text-align:center;color: black;font-weight: 700;">State analysis</div>
+                                <div class="circle" style="width: 100px;height: 100px;margin-left:20%;">#<%= stateData.rank %></div>
+
+                                <div class="evictionData" style="margin-top: 10px;">
+                                    <span style="color: black;"><%= state %></span>
+                                    <div class="evictionRate" style="color: black;">Total Evictions: <%= stateData.evictionRate %></div>
                                 </div>
                             </div>
                             <!-- state analysis end-->
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-1">
                         </div>
-                        <div class="col-md-5 cards" style="height: 300px;">
-                            <div class="rankingsTop">
-                                <span class="Charttitle">Top Evicting States in the United States</span>
-                                <div id="graphic" class="graphic"></div>
-                            </div>
+                        <div class="col-md-7 cards" style="height: 250px;">
+                            <span class="Charttitle" style="text-align:center;color: black;font-weight: 700;">Top Evicting States</span>
+                            <div id="graphic" class="graphic"></div>
                         </div>
                     </div>
                     <div class="row cards" style="height: 290px;">
                         <!-- heap map -->
-                        <div style="width: 60%; display: inline-block">
-                            <span class="Charttitle">Eviction analysis for US</span>
+                        <div class="stateTitle">
+                            <div class="Charttitle" style="text-align:center;color: black;font-weight: 700;">Eviction analysis for US</div>
                             <span id="key"></span>
                             <div id="map"></div>
                         </div>
                         <!-- heat map ends here -->
                     </div>
                 </div>
-                <div class="col-md-4" style="margin-left: 120px;">
-                    <div class="row cards" style="height: 200px;">
+                <div class="col-md-5" style="margin-left: 10px;">
+                    <div class="row cards" style="height: 190px;">
                         <!-- multiline chart -->
-                        <div style="width: 60%; display: inline-block">
+                        <div style="text-align:center;color: black;font-weight: 700;">
                             <span class="Charttitle">Effective analysis of Rent burden on Eviction Rate</span>
                             <div id="multiLinechart"></div>
                         </div>
                     </div>
-                    <div class="row cards" style="height: 200px;margin-top:20px;">
-                        <span class="Charttitle">Poverty Rate analysis for 2000 to 2016</span>
-                        <div id="rentline">
-                            <svg width="400" height="250"></svg>
+                    <div class="row cards" style="height: 180px;margin-top:10px;">
+                        <div style="text-align:center;color: black;font-weight: 700;">
+                            <span class="Charttitle">Poverty Rate analysis for 2000 to 2016</span>
+                            <div id="rentline" style="margin-top: -15px; margin-left: 50px;">
+                                <svg width="350" height="170"></svg>
+                            </div>
                         </div>
                     </div>
-                    <div class="row cards" style="height: 200px;margin-top:20px;">
-                        <span class="Charttitle">Number of evictions analysis from 2000 to 2016</span>
-                        <div id="piechart">
+                    <div class="row cards" style="height: 190px; margin-top:10px;margin-bottom:10px;">
+                        <div style="color: black;font-weight: 700;">
+                            <span class="Charttitle">Number of evictions analysis from 2000 to 2016</span>
+                            <div id="piechart" style="padding-left: 30px;padding-right: 20px;"></div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
 	</section>
-
 
     <div class="copyrights" style="height: 80px;">
         <div class="container">
@@ -397,16 +394,16 @@
     function addMap(data, selectedState) {
 
         //Width and height of map
-        var width = 550;
-        var height = 330;
+        var width = 500;
+        var height = 270;
 
         var lowColor = '#f9f9f9'
         var highColor = '#6f257f'
 
         // D3 Projection
         var projection = d3.geoAlbersUsa()
-            .translate([width / 2, height / 2]) // translate to center of screen
-            .scale([600]); // scale things down so see entire US
+            .translate([width / 2, height/1.5]) // translate to center of screen
+            .scale([400]); // scale things down so see entire US
 
         // Define path generator
         var path = d3.geoPath() // path generator that will convert GeoJSON to SVG paths
@@ -481,7 +478,7 @@
 
             // add a legend
             var w = 140,
-                h = 300;
+                h = 220;
 
             var key = d3.select("#key")
                 .append("svg")
@@ -529,9 +526,9 @@
     }
 
     function pieChart(data) {
-        var w = 400,                        //width
-            h = 400,                            //height
-            r = 100,                            //radius
+        var w = 450,                        //width
+            h = 150,                            //height
+            r = 75,                            //radius
             color = d3.scale.category20b();     //builtin range of colors
 
         var vis = d3.select("#piechart")
@@ -577,7 +574,7 @@
             .attr("text-anchor", "middle")
             .text(function (d, i) {
                 return data[i].value;
-            });
+            }).style("font-size", "10px");
 
         var legend = vis.selectAll(".legend")
             .data(data.map(function(d) { return d.label; }))
@@ -587,15 +584,15 @@
             .style("opacity","0");
 
         legend.append("rect")
-            .attr("x", w - 190 )
-            .attr("y", -20)
+            .attr("x", w - 180 )
+            .attr("y", -50)
             .attr("width", 18)
             .attr("height", 18)
             .style("fill", function(d, i) { return color(i); });
 
         legend.append("text")
-            .attr("x", w - 200 )
-            .attr("y", -10)
+            .attr("x", w - 190 )
+            .attr("y", -40)
             .attr("dy", ".35em")
             .style("font-size", "13px")
             .style("text-anchor", "end")
@@ -620,10 +617,10 @@
             top: 20,
             right: 25,
             bottom: 5,
-            left: 60
+            left: 40
         };
 
-        var width = 500 - margin.left - margin.right,
+        var width = 370 - margin.left - margin.right,
             height = 200 - margin.top - margin.bottom;
 
         var svg = d3.select("#graphic").append("svg")
@@ -716,7 +713,7 @@
 
     function multilineChart() {
 
-        var margin = {top: 50, right: 200, bottom: 100, left: 125};
+        var margin = {top: 150, right: 200, bottom: 20, left: 125};
 
         var width = 960 - margin.left - margin.right,
             height = 500 - margin.top - margin.bottom;
@@ -935,8 +932,8 @@
     }
 
     function stackedBarChart(data) {
-        var margin = {top: 20, right: 20, bottom: 30, left: 40},
-            width = 700 - margin.left - margin.right,
+        var margin = {top: 120, right: 20, bottom: 40, left: 40},
+            width = 450 - margin.left - margin.right,
             height = 250 - margin.top - margin.bottom;
 
         var x0 = d3.scale.ordinal()
@@ -999,9 +996,10 @@
 
             slice.append("text")
                 .text(function(d) {return d.categorie; })
-                .attr("y",220)
+                .attr("y",120)
                 .attr("x",25)
-                .style("font-size","15px");
+                .style("margin-left", "0px")
+                .style("font-size","13px");
 
             slice.selectAll("rect")
                 .data(function(d) { return d.values; })
