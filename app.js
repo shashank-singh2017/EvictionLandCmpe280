@@ -17,6 +17,7 @@ var chartRouter = require('./routes/linechart');
 var piechartRouter = require('./routes/piechart');
 var createRouter = require('./routes/create');
 var compareRouter = require('./routes/compare');
+var stateAnalysisRouter = require('./routes/stateAnalysis')
 var assert = require('assert');
 var app = express();
 
@@ -64,4 +65,5 @@ app.use('/linechart', chartRouter);
 app.use('/piechart', piechartRouter);
 app.use('/create', createRouter);
 app.use('/compare', compareRouter);
+app.use('/stateAnalysis', stateAnalysisRouter)
 module.exports = app;
