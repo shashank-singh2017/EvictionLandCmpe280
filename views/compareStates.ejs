@@ -5,13 +5,35 @@
     <title>US Map</title>
     <!--<link rel="stylesheet" href="/stylesheets/bootstrap.min.css">-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" >
+    <link rel="stylesheet" href="./../stylesheets/bootstrap.min.css">
     <link rel="stylesheet" href="/stylesheets/map.css">
-    <link rel="stylesheet" href="/stylesheets/analyzeData.css">
     <script src="/javascripts/raphael.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>
     <script src="/javascripts/color.jquery.js"></script>
     <script src="/javascripts/jquery.usmap.js"></script>
     <script src="/javascripts/domModify.js"></script>
+
+    <script src="/javascripts/raphael.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>
+    <script src="/javascripts/color.jquery.js"></script>
+    <script src="/javascripts/jquery.usmap.js"></script>
+    <script src="/javascripts/domModify.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.2/d3.min.js" charset="utf-8"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400, 700" rel="stylesheet">
+    <!-- Site Icons -->
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+
+    <link rel="stylesheet" href="./../stylesheets/font-awesome.min.css">
+    <!-- Site CSS -->
+    <link rel="stylesheet" href="./../stylesheets/style.css">
+
+    <link rel="stylesheet" href="./../stylesheets/form.css">
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="./../stylesheets/responsive.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./../stylesheets/custom.css">
 
     <script>
         $(document).ready(function() {
@@ -27,7 +49,7 @@
                     $.ajax({url : Url, success: function (res) {
                             var html ="";
                             for (var i = 1; i< res.data.length; i++) {
-                                html += ' <div class="stateNames ui-widget-content">' +
+                                html += '<div class="stateNames ui-widget-content">' +
                                     '<span class="stateDataCounty">'+res.data[i].county+'</span>' +
                                     '<span class="stateDataCase">'+res.data[i].case_numbers+'</span>' +
                                     '</div>';
@@ -37,21 +59,23 @@
                     var nodelist = document.getElementById("result").childNodes.length;
                     if (nodelist < 3) {
                         var header = document.createElement('h3');
-                        header.className='card-header border border-primary';
+                        header.className='card-header';
                         var txt = document.createTextNode(selected.name);
                         header.appendChild(txt);
 
                         var bodydiv = document.createElement('div');
-                        bodydiv.className = 'card-body border border-primary';
+                        bodydiv.className = 'card-body';
                         var table = document.createElement('table');
-                        table.className = 'table table-bordered';
+                        table.className = 'tableCustom';
                         const Url ="http://localhost:3000/compare/statistics/?selectedState="+selected.name;
                         $.ajax({url : Url, success: function (res) {
                             var data = res.data;
                             for (var i = 0; i<data.length; i++) {
                                 var row = document.createElement('tr');
                                 var cell1 = document.createElement('td');
+                                cell1.className = 'firstCell';
                                 var cell2 = document.createElement('td');
+                                cell2.className = 'secondCell';
                                 cell1.appendChild(document.createTextNode(data[i]['label']));
                                 cell2.appendChild(document.createTextNode(data[i]['value']));
                                 row.appendChild(cell1);
@@ -67,7 +91,7 @@
                         bodydiv.appendChild(table);
 
                         var element = document.createElement("div");
-                        element.className = 'card border-primary col-sm-4 col-6 ';
+                        element.className = 'card col-sm-3 col-6';
                         element.appendChild(header);
                         element.appendChild(bodydiv);
 
@@ -94,26 +118,62 @@
 
 </head>
 
-<body onload=headerModification()>
-<% include header %>
-<div id="alert">Selected State: </div>
-<div id="refresh">
-    <button type="button" class="btn btn-link btn-lg" onClick="window.location.reload();">
-        <span class="glyphicon glyphicon-refresh">Refresh</span>
-    </button>
-</div>
-<div id="map"></div>
+<body id="page-top" class="politics_version" style="background-color: white;">
 
-<div id="alert2" class="alert2"></div>
-<div class="container">
-<!--<div  class="row">-->
-    <div class="card-deck-wrapper">
-        <div id="result" class="card-deck border-primary"></div>
-    </div>
-<!--</div>-->
-</div>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav" style="background-color: #303636;height: 60px;">
+      <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top">
+			<h2 class="logo">EvictionLand</h2>
+		</a>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav text-uppercase ml-auto">
+            <li style="color: black; margin-left: 30px;">
+              <a class="links" href="#" style="color:white;">Home</a>
+            </li>
+            <li style="color: black; margin-left: 30px;">
+              <a class="links" href="#" style="color:white;">About Us</a>
+            </li>
+            <li style="color: black; margin-left: 30px;">
+              <a class="links " href="#" style="color:white;">Services</a>
+            </li>
+			<li style="color: black; margin-left: 30px;">
+              <a class="links" href="#" style="color:white;">Our Team</a>
+              </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
 
-<% include footer%>
+    <section id="signup"  style="margin-top: 90px; min-height: 81%;">
+        <div id="refresh">
+            <button type="button" class="btn btn-link btn-lg" onClick="window.location.reload();">
+                <span class="glyphicon glyphicon-refresh">Refresh</span>
+            </button>
+        </div>
+        <div id="map"></div>
+
+        <div id="alert2" class="alert2"></div>
+        <div class="container">
+        <!--<div  class="row">-->
+            <div class="card-deck-wrapper">
+                <div id="result" class="card-deck border-primary"></div>
+            </div>
+        <!--</div>-->
+        </div>
+    </section>
+
+    <div class="copyrights" style="height: 80px;">
+        <div class="container">
+            <div class="footer-distributed" style="float: left;">
+                <div class="footer-right">
+                    <p class="footer-company-name">All Rights Reserved. &copy; 2018 <a href="#">EvictionLand</a>
+                </div>
+            </div>
+        </div><!-- end container -->
+    </div><!-- end copyrights -->
+
+    <a href="#" id="scroll-to-top" class="dmtop global-radius"><i class="fa fa-angle-up"></i></a>
+
 </body>
 
 </html>

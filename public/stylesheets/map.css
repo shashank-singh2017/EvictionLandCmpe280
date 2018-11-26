@@ -1,7 +1,6 @@
 #alert {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 16px;
-  background-color: #777777;
   color: #333;
   padding: 5px;
   font-weight: bold;
@@ -38,4 +37,38 @@ html, body {
 .row {
   margin: auto;
   padding-left: 120px;
+}
+
+.tableCustom {
+    width: 400px;
+    margin-bottom: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    padding-top: 20px;
+}
+
+tr {
+    height: 30px;
+    border: none;
+}
+
+.firstCell {
+    width: 45%;
+    padding-left: 5px;
+}
+
+.secondCell {
+    padding-left: 5px;
+}
+
+.card.col-sm-3.col-6 {
+    padding-top: 10px;
+    background-color: #C3CDE6;
+    margin-left: 60px;
+    margin-bottom: 20px;
+}
+
+.card-header.border.border-primary {
+    color: maroon;
+    background: white;
 }
