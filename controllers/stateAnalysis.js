@@ -71,7 +71,7 @@ function joinData(data, usGeoJSON) {
         byState[usGeoJSON.features[i].properties.name] = usGeoJSON.features[i];
     }
 
-    for (i = 0; i < data.length; i++) {
+    for (i = 0; i < data.length-1; i++) {
         byState[data[i].name].properties = {
             'name' : data[i].name,
             'eviction-filings' : data[i]["eviction-filings"]
