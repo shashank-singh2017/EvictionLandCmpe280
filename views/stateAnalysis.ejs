@@ -11,13 +11,33 @@
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <link rel="stylesheet" href="/stylesheets/dashboard.css">
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.2/d3.min.js" charset="utf-8"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400, 700" rel="stylesheet">
+    <!-- Site Icons -->
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="./../stylesheets/bootstrap.min.css">
+
+    <link rel="stylesheet" href="./../stylesheets/font-awesome.min.css">
+    <!-- Site CSS -->
+    <link rel="stylesheet" href="./../stylesheets/style.css">
+
+    <link rel="stylesheet" href="./../stylesheets/form.css">
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="./../stylesheets/responsive.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./../stylesheets/custom.css">
+
 
     <style>
         body { margin:0; padding:0; }
-        #map { position:absolute; top:40px; bottom:0; width:70%; height:50%; margin-left: 80px}
+        #map { position:absolute; top:40px; bottom:0; width:70%; height:100%; margin-left: 80px}
     </style>
 </head>
-<body>
+<body id="page-top" class="politics_version" style="background-color: white;">
 <style>
     .menu-ui {
         position:absolute;
@@ -31,21 +51,74 @@
     }
 </style>
 
-<div id='map'></div>
-<div id='variables' class='menu-ui'></div>
-<div style="margin-top: 600px;display: inline-block">
-    <span class="Charttitle">Number of evictions analysis from 2000 to 2016</span>
-    <div id="line">
-        <svg width="400" height="250"></svg>
-    </div>
-</div>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav" style="background-color: #303636;height: 60px;">
+      <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top">
+            <h2 class="logo">EvictionLand</h2>
+        </a>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav text-uppercase ml-auto">
+            <li style="color: black; margin-left: 30px;">
+              <a class="links" href="#" style="color:white;">Home</a>
+            </li>
+            <li style="color: black; margin-left: 30px;">
+              <a class="links" href="#" style="color:white;">About Us</a>
+            </li>
+            <li style="color: black; margin-left: 30px;">
+              <a class="links " href="#" style="color:white;">Services</a>
+            </li>
+            <li style="color: black; margin-left: 30px;">
+              <a class="links" href="#" style="color:white;">Our Team</a>
+              </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
 
-<div style="margin-top: 600px;display: inline-block">
-    <span class="Charttitle">analysis from 2000 to 2016 </span>
-    <div id="lineprop">
-        <svg width="400" height="250"></svg>
-    </div>
-</div>
+    <section id="signup"  style="margin-top: 90px;">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-9" style="min-height: 500px;">
+                    <div id="map" style="margin-left: 50px;width: 90%;"></div>
+                </div>
+                <div class="col-md-2">
+                    <div id='variables' class='menu-ui'></div>
+                </div>
+            </div>
+            <br/>
+            <div class="row" style="margin-left: 20px;">
+                <div class="col-md-1">
+                </div>
+                <div class="col-md-5">
+                    <span class="Charttitle">Number of evictions analysis from 2000 to 2016</span>
+                    <div id="line">
+                        <svg width="400" height="250"></svg>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <span class="Charttitle" style="text-align: left;padding-left: 20%;">analysis from 2000 to 2016 </span>
+                    <div id="lineprop">
+                        <svg width="400" height="250"></svg>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <div class="copyrights" style="height: 80px;">
+        <div class="container">
+            <div class="footer-distributed" style="float: left;">
+                <div class="footer-right">
+                    <p class="footer-company-name">All Rights Reserved. &copy; 2018 <a href="#">EvictionLand</a>
+                </div>
+            </div>
+        </div><!-- end container -->
+    </div><!-- end copyrights -->
 
 <!-- jQuery is required for this example. -->
 <script src='https://code.jquery.com/jquery-1.11.0.min.js'></script>
@@ -449,7 +522,6 @@
         }
 
     }
-
 </script>
 </body>
 </html>
