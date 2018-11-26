@@ -36,7 +36,7 @@ html, body {
 
 .row {
   margin: auto;
-  padding-left: 120px;
+  padding-left: 100px;
 }
 
 .tableCustom {
@@ -53,7 +53,7 @@ tr {
 }
 
 .firstCell {
-    width: 45%;
+    width: 40%;
     padding-left: 5px;
 }
 
