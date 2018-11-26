@@ -145,7 +145,7 @@
     var stackedChartData = <%- JSON.stringify(stackedChartData) %>
     var pieChartData = <%- JSON.stringify(pieChartData) %>
     addMap(mapDataForState, selectedState);
-    addLine(yearDataForState);
+    //addLine(yearDataForState);
     addRentBurdenLineGraph(yearRentData);
     rankingData.push({
         "rank": <%= stateData.rank %>,
@@ -397,8 +397,8 @@
     function addMap(data, selectedState) {
 
         //Width and height of map
-        var width = 750;
-        var height = 430;
+        var width = 550;
+        var height = 330;
 
         var lowColor = '#f9f9f9'
         var highColor = '#6f257f'
@@ -406,7 +406,7 @@
         // D3 Projection
         var projection = d3.geoAlbersUsa()
             .translate([width / 2, height / 2]) // translate to center of screen
-            .scale([1000]); // scale things down so see entire US
+            .scale([600]); // scale things down so see entire US
 
         // Define path generator
         var path = d3.geoPath() // path generator that will convert GeoJSON to SVG paths
@@ -483,7 +483,7 @@
             var w = 140,
                 h = 300;
 
-            var key = d3.select("body")
+            var key = d3.select("#key")
                 .append("svg")
                 .attr("width", w)
                 .attr("height", h)

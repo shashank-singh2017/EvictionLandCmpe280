@@ -113,9 +113,8 @@ body {
 }
 
 #map {
-    margin-top: 60px;
+    margin-top: -49px;
 }
-
 
 
 .axis {
@@ -179,10 +178,10 @@ body {
     margin-left: 0px;
 }
 
-.legend {
+#key .legend {
     position: absolute;
     left: 20px;
-    top: 200px;
+     top: 355px;
 }
 
 span.Charttitle {
@@ -282,19 +281,18 @@ span.BP {
 }
 
 .stateTitle {
-    border: 1px solid;
-    padding: 25px;
+   // padding: 25px;
     font-size: 18px;
 }
 
 .circle
 {
-    width: 150px;
-    height: 150px;
+    width: 125px;
+    height: 125px;
     border-radius: 50%;
-    font-size: 85px;
+    font-size: 75px;
     color: #fff;
-    line-height: 150px;
+    line-height: 125px;
     text-align: center;
     background: #000;
     display: inline-block;
