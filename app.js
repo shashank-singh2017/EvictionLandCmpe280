@@ -16,23 +16,24 @@ var multer = require('multer');
 var chartRouter = require('./routes/linechart');
 var piechartRouter = require('./routes/piechart');
 var createRouter = require('./routes/create');
+var compareRouter = require('./routes/compare');
 var assert = require('assert');
 var app = express();
 
-// var store = new MongoDBStore({
-//   uri: 'mongodb://localhost:27017/cmpe280',
-//   collection: 'sessionsData'
-// });
+var store = new MongoDBStore({
+  uri: 'mongodb://localhost:27017/cmpe280',
+  collection: 'sessionsData'
+});
 
-// store.on('connected', function() {
-//     store.client; // The underlying MongoClient object from the MongoDB driver
-// });
-//
-// // Catch errors
-// store.on('error', function(error) {
-//   assert.ifError(error);
-//   assert.ok(false);
-// });
+store.on('connected', function() {
+    store.client; // The underlying MongoClient object from the MongoDB driver
+});
+
+// Catch errors
+store.on('error', function(error) {
+  assert.ifError(error);
+  assert.ok(false);
+});
 
 app.set('view engine', 'ejs');
 
@@ -62,5 +63,5 @@ app.use('/dashboard', dashboard);
 app.use('/linechart', chartRouter);
 app.use('/piechart', piechartRouter);
 app.use('/create', createRouter);
-
+app.use('/compare', compareRouter);
 module.exports = app;

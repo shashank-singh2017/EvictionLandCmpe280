@@ -2,7 +2,7 @@ module.exports.home = function(req,res) {
 
     console.log(req.session.userSession);
 
-    if(!req.session.userSession) {
+    /*if(!req.session.userSession) {
         res.render('../views/login',{
             message : "Please login to go to Homepage",
             error: "You are not logged in."
@@ -10,7 +10,8 @@ module.exports.home = function(req,res) {
     }
     else {
         res.render('../views/home');
-    }
+    }*/
+    res.render('../views/home');
 };
 
 module.exports.index = function(req,res) {

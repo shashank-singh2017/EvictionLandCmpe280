@@ -16,9 +16,9 @@ var upload = multer({storage: storage});
 
 
 /* Get Login Page */
-router.get('/', adminController.login);
+//router.get('/', adminController.login);
 
-router.post('/handleSignin', adminController.handleSignin);
+//router.post('/handleSignin', adminController.handleSignin);
 
 router.get('/home', adminController.home);
 
