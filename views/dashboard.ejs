@@ -708,7 +708,7 @@
 
     function stackedBarChart(data) {
         var margin = {top: 120, right: 20, bottom: 40, left: 40},
-            width = 450 - margin.left - margin.right,
+            width = 500 - margin.left - margin.right,
             height = 250 - margin.top - margin.bottom;
 
         var x0 = d3.scale.ordinal()
@@ -744,10 +744,10 @@
             x1.domain(rateNames).rangeRoundBands([0, x0.rangeBand()]);
             y.domain([0, d3.max(data, function(categorie) { return d3.max(categorie.values, function(d) { return d.value; }); })]);
 
-            svg.append("g")
+            /*svg.append("g")
                 .attr("class", "x axis")
                 .attr("transform", "translate(0," + height + ")")
-                .call(xAxis);
+                .call(xAxis);*/
 
             svg.append("g")
                 .attr("class", "y axis")
@@ -755,7 +755,7 @@
                 .call(yAxis)
                 .append("text")
                 .attr("transform", "rotate(-90)")
-                .attr("y", 6)
+                .attr("y", 0)
                 .attr("dy", ".71em")
                 .style("text-anchor", "end")
                 .style('font-weight','bold')
@@ -771,8 +771,8 @@
 
             slice.append("text")
                 .text(function(d) {return d.categorie; })
-                .attr("y",120)
-                .attr("x",25)
+                .attr("y",110)
+                .attr("x",18)
                 .style("margin-left", "0px")
                 .style("font-size","13px");
 
@@ -780,7 +780,7 @@
                 .data(function(d) { return d.values; })
                 .enter().append("rect")
                 .attr("width", x1.rangeBand())
-                .attr("x", function(d) { return x1(d.rate)+ 5; })
+                .attr("x", function(d) { return x1(d.rate)+ 10; })
                 .style("fill", function(d) { return color(d.rate) })
                 .attr("y", function(d) { return y(0); })
                 .attr("height", function(d) { return height - y(0); })
@@ -808,14 +808,14 @@
 
             legend.append("rect")
                 .attr("x", width + 50 )
-                .attr("y", -20)
+                .attr("y", -40)
                 .attr("width", 18)
                 .attr("height", 18)
                 .style("fill", function(d) { return color(d); });
 
             legend.append("text")
                 .attr("x", width + 45 )
-                .attr("y", -10)
+                .attr("y", -30)
                 .attr("dy", ".35em")
                 .style("font-size", "13px")
                 .style("text-anchor", "end")

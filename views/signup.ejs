@@ -34,7 +34,7 @@
     <script src="/javascripts/domModify.js"></script>
     <script src="/javascripts/signupValidations.js"></script>
 </head>
-<body id="page-top" class="politics_version" style="background-color: #d6dbdb;">
+<body id="page-top" class="politics_version background-color-grey">
 
     <!-- Navigation -->
 
@@ -56,13 +56,13 @@
       </div>
     </nav>
 
-	<section id="signup"  style="margin-top: 90px; height: 77%;">
+	<section id="signup"  style="margin-top: 90px; height: 95%;">
         <div class="container">
         		<div class="col-md-5 formBox">
                         <br/>
-                        <h2 style="font-weight: 900;">SignUp</h2>
+                        <h2 style="font-weight: 900; text-align: center">SignUp</h2>
 
-                    <form name="signupForm" action="/users/handleSignup" method="post" onsubmit="return validateSignupForm()">
+                    <form class="signupFormCustomCard" name="signupForm" action="/users/handleSignup" method="post" onsubmit="return validateSignupForm()">
                         <div class="inputFields">
                             <label class="feildName">Name: </label>
                             <input class="name" name="userName" type="text" />
@@ -102,9 +102,9 @@
                             <label class="error" id="phoneError"></label>
                         </div>
                         <br/>
-                        <div class="inputFields">
+                        <div class="inputFields" style="text-align: center">
                             <input class="btn btn-primary" type="submit" value="Submit" style="background:maroon;"/>
-                            <input class="btn btn-primary" type="button" onclick="clearForm()" value="Clear" style="background:maroon;"/>
+                            <input class="btn btn-primary"  type="button" onclick="clearForm()" value="Clear" style="margin-left:20px;background:maroon;"/>
                         </div>
 
                     </form>

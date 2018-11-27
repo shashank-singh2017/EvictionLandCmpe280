@@ -37,7 +37,7 @@
     <title>Login to EvictionLand</title>
 </head>
 
-<body id="page-top" class="politics_version" style="background-color: #d6dbdb;">
+<body id="page-top" class="politics_version background-color-grey" >
 
 <!-- Navigation -->
 
@@ -61,9 +61,9 @@
     <div class="container">
         <div class="col-md-5 formBox">
             <br/>
-            <h2 style="font-weight: 900;">SignIn</h2>
+            <h2 style="font-weight: 900; text-align: center">SignIn</h2>
 
-            <form name="loginForm" action="/users/handleSignin" onsubmit="return validateLoginForm()" method="post">
+            <form class="loginFormCard" name="loginForm" action="/users/handleSignin" onsubmit="return validateLoginForm()" method="post">
                 <div class="inputFields">
                     <label class="feildName">Email: </label>
                     <input class="email" name="email" type="email"/>
@@ -76,10 +76,10 @@
                     <label class="error" id="passwordError"></label>
                 </div>
                 <br>
-                <div class="inputFields">
+                <div class="inputFields" style="text-align: center">
                     <input class="btn btn-primary" type="submit" value="Submit" style="background:maroon;"/>
                     <input class="btn btn-primary" type="button" value="Clear" onclick="clearForm()"
-                           style="background:maroon;"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                           style="background:maroon;margin-left: 20px;"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 </div>
 
                 <div class="errorDiv">
