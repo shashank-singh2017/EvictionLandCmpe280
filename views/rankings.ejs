@@ -4,12 +4,28 @@
     <head>
         <link rel="stylesheet" href="/stylesheets/bargraph.css">
         <link rel="stylesheet" href="/stylesheets/rankings.css">
-        <link rel="stylesheet" href="/stylesheets/header.css">
+
         <link href="/stylesheets/jquery-ui.css" rel="stylesheet">
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-        <script src="/javascripts/domModify.js"></script>
+        <!-- <script src="/javascripts/domModify.js"></script> -->
+        <!-- Site Icons -->
+        <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+        <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="./../stylesheets/bootstrap.min.css">
+
+        <link rel="stylesheet" href="./../stylesheets/font-awesome.min.css">
+        <!-- Site CSS -->
+        <link rel="stylesheet" href="./../stylesheets/style.css">
+
+        <!-- Responsive CSS -->
+        <link rel="stylesheet" href="./../stylesheets/responsive.css">
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="./../stylesheets/custom.css">
+    	<script src="./../javascripts/modernizr.js"></script> <!-- Modernizr -->
 
         <script>
             $(function() {
@@ -50,50 +66,62 @@
         </script>
     </head>
 
-    <body onload=headerModification()>
-        <div class="header"></div>
-        <div>
+    <body id="page-top" class="politics_version">
+        <!-- Navigation -->
 
-            <div class="header">
-                <nav>
-                    <ul id="navList">
-                        <li><span>EvictionLand</span></li>
-                        <li><a href="/home">Home</a></li>
-                        <li><a href="/dashboard/state">Dashboard</a></li>
-                        <li><a href="/rankings">Rankings</a></li>
-                        <li><a href="/ourteam">Contact</a></li>
-                        <li><a href="/users/logout">Logout</a></li>
-                    </ul>
-                </nav>
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav" style="background-color: white;height: 60px;border-bottom: 1px solid; border-color: maroon;">
+          <div class="container">
+            <a class="navbar-brand js-scroll-trigger" href="#page-top">
+    			<h2 class="logo">EvictionLand</h2>
+    		</a>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+              <ul class="navbar-nav ml-auto">
+                <li style="color: black; margin-left: 30px;">
+                  <a class="links" href="/home" style="color:maroon;font-size:16px;">Home</a>
+                </li>
+                <li style="color: black; margin-left: 30px;">
+                  <a class="links" href="/users/login" style="color:maroon;font-size:16px;">Login</a>
+                </li>
+              </ul>
             </div>
+          </div>
+        </nav>
 
-            <div class="forms">
-                <div class="form1">
-                    <form class="rankingForm" method="get" action="/rankings/state">
-                        <div class="heading">Please search a region to display Eviction Rankings</div>
+        <section id="signup"  style="margin-top: 90px; height: 89%;">
 
-                        <div class="ui-widget">
-                            <label for="tags">Search: </label>
-                            <input id="tags" name="selectedState">
-                            <button class="okButton" type="submit">Submit</button>
-                        </div>
-                    </form>
+                    <div style="margin-left: 2%;margin-right: 3%; width: 100%;">
+                        <form class="rankingForm" method="get" action="/rankings/state">
+                            <!-- <div class="heading">Please search a region to display Eviction Rankings</div> -->
+                            <span style="font-size: 19px;">Top <span id="numbers"></span>results with Eviction Rate in Descending order:</span>
+                            <span style="width: 100%; margin-left: 34%;">
+                                <label for="tags">Search: </label>
+                                <input id="tags" name="selectedState" style="height: 35px;border-radius: 4px; border: 1px solid;border-color: gray;">
+                                <button class="okButton" type="submit" style="font-size: 16px;width: 90px;height:36px; border-radius: 4px;">Submit</button>
+                            </span>
+                        </form>
+                    </div>
                 </div>
-            </div>
+                <br>
+                <br>
+                <div id="graphic" class="graphic"></div>
+        </section>
 
-
-        </div>
-        <br>
-        <br>
-        <div class="rankingheading"> Top <span id="numbers"></span>results with Eviction Rate in Descending order:</div>
-        <div id="graphic" class="graphic"></div>
+        <div class="copyrights" style="height: 80px;">
+            <div class="container">
+                <div class="footer-distributed" style="float: left;">
+                    <div class="footer-right">
+                        <p class="footer-company-name">All Rights Reserved. &copy; 2018 <a href="#">EvictionLand</a>
+                    </div>
+                </div>
+            </div><!-- end container -->
+        </div><!-- end copyrights -->
         <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
         <script>
             //set up svg using margin conventions - we'll need plenty of room on the left for labels
             var data;
             data = <%- JSON.stringify(data) %>;
             var margin = {
-                top: 20,
+                top: 0,
                 right: 25,
                 bottom: 5,
                 left: 60
@@ -123,7 +151,7 @@
             var bars = svg.selectAll(".bar")
                 .data(data)
                 .enter()
-                .append("g")
+                .append("g");
 
             var tooltip = d3.select("#graphic")
                 .append("div")
@@ -141,6 +169,7 @@
                 .attr("width", function(d) {
                     return x(d.case_numbers);
                 })
+                .style("fill", "#CD5C5C")
                 .on("mouseover", function() {
                     return tooltip.style("visibility", "visible");
                 })
@@ -184,5 +213,4 @@
         </script>
         <script src="/external/jquery/jquery.js"></script>
         <script src="/javascripts/jquery-ui.js"></script>
-        <% include footer %>
     </body>
