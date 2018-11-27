@@ -3,72 +3,160 @@
     <meta charset="UTF-8">
     <title>Create new eviction record</title>
     <link rel="stylesheet" href="/stylesheets/form.css">
-    <link rel="stylesheet" href="/stylesheets/header.css">
     <script src="/javascripts/evictionFormValidation.js"></script>
-</head>
-<body onload="headerModification()">
-    <div class="header">
-        <nav>
-            <ul id="navList">
-                <li><span>EvictionLand</span></li>
-                <li><a href="/admin/home">Home</a></li>
-                <li><a href="/dashboard/state">Dashboard</a></li>
-                <li><a href="/rankings">Rankings</a></li>
-                <li><a href="/ourteam">Contact</a></li>
-                <li><a href="/users/logout">Logout</a></li>
-            </ul>
-        </nav>
-    </div>
-<div>
-    <div class="content">
-        <div class="message"><label><%=message %></label></div>
-        <h2>Create new Eviction Record</h2>
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
 
-        <form name="evictionForm" action="/create/new" method="post" onsubmit="return validateEvictionForm()">
-            <span class="lab">State:</span>
-            <input type="text"  class="inpField" name="name" value="">
-            <label class="error" id="NameError"></label>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="./../stylesheets/bootstrap.min.css">
+
+    <link rel="stylesheet" href="./../stylesheets/font-awesome.min.css">
+    <!-- Site CSS -->
+    <link rel="stylesheet" href="./../stylesheets/style.css">
+
+    <link rel="stylesheet" href="./../stylesheets/form.css">
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="./../stylesheets/responsive.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./../stylesheets/custom.css">
+	<script src="./../javascripts/modernizr.js"></script> <!-- Modernizr -->
+</head>
+<body id="page-top" class="politics_version">
+    <!-- Navigation -->
+
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav" style="background-color: white;height: 60px;border-bottom: 1px solid; border-color: maroon;">
+      <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top">
+			<h2 class="logo">EvictionLand</h2>
+		</a>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav text-uppercase ml-auto">
+            <li style="color: black; margin-left: 30px;">
+              <a class="links" href="/home" style="color:maroon;font-size:16px;">Home</a>
+            </li>
+            <li style="color: black; margin-left: 30px;">
+              <a class="links" href="/users/login" style="color:maroon;font-size:16px;">Login</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <section id="signup"  style="margin-top: 90px; min-height: 95%;">
+        <div class="content">
+            <div class="message"><label><%=message %></label></div>
+            <h2>Create new Eviction Record</h2>
             <br>
-            <br>
-            <span class="lab">Year:</span>
-            <input type="number" class="inpField" name="year" value="">
-            <label class="error" id="yearError"></label>
-            <br>
-            <br>
-            <span class="lab">Population:</span>
-            <input type="number" class="inpField" name="population" value="">
-            <label class="error" id="populationError"></label>
-            <br>
-            <br>
-            <span class="lab">Poverty Rate:</span>
-            <input type="number" class="inpField" name="povRate" value="">
-            <label class="error" id="povRateError"></label>
-            <br>
-            <br>
-            <span class="lab">Median Gross Rent:</span>
-            <input type="number" class="inpField" name="MedGrossRent" value="">
-            <label class="error" id="MedGrossRentError"></label>
-            <br>
-            <br>
-            <span class="lab">Median Household Income:</span>
-            <input type="text" class="inpField" name="MedHouseInc" value="">
-            <label class="error" id="MedHouseIncError"></label>
-            <br>
-            <br>
-            <span class="lab">Median Property Value:</span>
-            <input type="text" class="inpField" name="MedianPropValue" value="">
-            <label class="error" id="MedianPropError"></label>
-            <br>
-            <br>
-            <span class="lab">Rent Burden:</span>
-            <input type="text" class="inpField" name="RentBurden" value="">
-            <label class="error" id="RentBurdenError"></label>
-            <br>
-            <br>
-            <input type="submit" value="Submit" class="butt">
-        </form>
-    </div>
-</div>
-<% include footer %>
+            <form name="evictionForm" action="/create/new" method="post" onsubmit="return validateEvictionForm()">
+                <div class="container">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <span class="lab">State:</span>
+                            </div>
+                            <div class="col-md-9">
+                                <input type="text"  class="inpField" name="name" value="">
+                                <label class="error" id="NameError"></label>
+                            </div>
+                        <div>
+
+                        <br>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <span class="lab">Year:</span>
+                            </div>
+                            <div class="col-md-9">
+                                <input type="number" class="inpField" name="year" value="">
+                                <label class="error" id="yearError"></label>
+                            </div>
+                        </div>
+
+                        <br>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <span class="lab">Population:</span>
+                            </div>
+                            <div class="col-md-9">
+                                <input type="number" class="inpField" name="population" value="">
+                                <label class="error" id="populationError"></label>
+                            </div>
+                        </div>
+
+                        <br>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <span class="lab">Poverty Rate:</span>
+                            </div>
+                            <div class="col-md-9">
+                                <input type="number" class="inpField" name="povRate" value="">
+                                <label class="error" id="povRateError"></label>
+                            </div>
+                        </div>
+
+                        <br>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <span class="lab">Median Gross Rent:</span>
+                            </div>
+                            <div class="col-md-9">
+                                <input type="number" class="inpField" name="MedGrossRent" value="">
+                                <label class="error" id="MedGrossRentError"></label>
+                            </div>
+                        </div>
+
+                        <br>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <span class="lab">Median Household Income:</span>
+                            </div>
+                            <div class="col-md-9">
+                                <input type="text" class="inpField" name="MedHouseInc" value="">
+                                <label class="error" id="MedHouseIncError"></label>
+                            </div>
+                        </div>
+
+                        <br>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <span class="lab">Median Property Value:</span>
+                            </div>
+                            <div class="col-md-9">
+                                <input type="text" class="inpField" name="MedianPropValue" value="">
+                                <label class="error" id="MedianPropError"></label>
+                            </div>
+                        </div>
+
+                        <br>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <span class="lab">Rent Burden:</span>
+                            </div>
+                            <div class="col-md-9">
+                                <input type="text" class="inpField" name="RentBurden" value="">
+                                <label class="error" id="RentBurdenError"></label>
+                            </div>
+                        <div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-1">
+                            </div>
+                            <div class="col-md-2">
+                                <input type="submit" value="Submit" class="butt" style="color: white;border-radius: 3px;">
+                            </div>
+                        </div>
+
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <div class="copyrights" style="height: 80px;">
+        <div class="container">
+            <div class="footer-distributed" style="float: left;">
+                <div class="footer-right">
+                    <p class="footer-company-name">All Rights Reserved. &copy; 2018 <a href="#">EvictionLand</a>
+                </div>
+            </div>
+        </div><!-- end container -->
+    </div><!-- end copyrights -->
 </body>
 </html>
