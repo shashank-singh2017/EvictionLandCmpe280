@@ -15,13 +15,13 @@ module.exports.rankings = function(req,res) {
     const cases = db.get('reportedCases');
     var dataJsonArray = [];
 
-    cases.find({"year":2016}, {sort: {State_Reported_Cases: -1}, limit:10}).then((results)=>{
+    cases.find( {},{sort: {case_numbers: -1}, limit:10}).then((results)=>{
        for(var i= 0; i < results.length; i++){
             dataJsonArray.push({
                 rank: i+1,
                 state: results[i].state,
-                county: results[i].County,
-                case_numbers: results[i].State_Reported_Cases
+                county: results[i].county,
+                case_numbers: results[i].case_numbers
             });
        }
        console.log(results);
