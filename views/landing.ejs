@@ -146,10 +146,10 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav text-uppercase ml-auto">
             <li style="color: black; margin-left: 30px;">
-              <a class="links" href="#" style="color:white;">Home</a>
+              <a class="links" href="/admin/home" style="color:white;">Home</a>
             </li>
             <li style="color: black; margin-left: 30px;">
-              <a class="links" href="#" style="color:white;">Bulk Upload</a>
+              <a class="links" href="/admin/bulkupload" style="color:white;">Bulk Upload</a>
             </li>
             <li style="color: black; margin-left: 30px;">
               <a class="links " href="/admin/usermanage" style="color:white;">User Management</a>
@@ -239,31 +239,7 @@
                 </div>
 
             </div>
-            <div class="forms populateData">
-                <span class="title">Populate database</span>
-                <div class="leftside" id="csvfileUpload">
-                    <form method="post" enctype="multipart/form-data" action="/admin/add">
-                        <h4 for="csvfile">Please Upload a file to populate the Database. (.xlxs)</h4>
 
-                        <input type="file" name="csvfile" id="csvfile"><br>
-                        <br/>
-                        <button type="submit" class="okButton">Submit</button>
-                        <label class="msg"><%= message %></label>
-                        <label class="err"><%= error %></label>
-                    </form>
-
-                    <form method="post" enctype="multipart/form-data" action="/admin/addUSData">
-                        <h4 for="csvfile">Please upload a file for dashboard</h4>
-
-                        <input type="file" name="USDatafile" id="USDatafile"><br>
-                        <br/>
-                        <button type="submit" class="okButton">Submit</button>
-                        <label class="msg"><%= message %></label>
-                        <label class="err"><%= error %></label>
-                    </form>
-                </div>
-              
-            </div>
         </div>
 
         </div>

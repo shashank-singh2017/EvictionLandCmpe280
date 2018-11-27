@@ -35,6 +35,22 @@ module.exports.usermanagement = function (req, res) {
     });
 };
 
+module.exports.bulkupload = function (req, res) {
+    const cases = db.get('USData');
+    cases.find().then((results) => {
+        console.log(typeof results[0]._id.toString());
+
+        res.render('../views/landing_bulkupload', {
+            message: "",
+            error: "",
+            errorMsg: "",
+            userdata: [],
+            evictiondata: results
+        });
+    });
+};
+
+
 
 module.exports.showEvictionByState = function (req, res) {
     const state = req.query.state;

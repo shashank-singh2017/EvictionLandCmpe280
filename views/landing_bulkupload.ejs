@@ -18,7 +18,7 @@
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400, 700" rel="stylesheet">
     <!-- Site Icons -->
-    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
     <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
 
     <!-- Bootstrap CSS -->
@@ -49,7 +49,7 @@
                     user: email
                 },
                 success: function (res) {
-                    $('#searchResult').html("<div class='alert alert-success' style='font-size: 25px;'>User is deleted from the database.</div>");
+                    $('#searchResult').html("Deleted User");
                 }
             });
         }
@@ -99,7 +99,7 @@
                     url: Url,
                     data: data,
                     success: function (res) {
-                        $('#searchResult').html("<div class='alert alert-success' style='font-size: 25px;'>User details are updated to the database.</div>");
+                        $('#searchResult').html("Updated User");
                         document.getElementById("editContainer").style.display = "none";
                     }
                 });
@@ -108,7 +108,7 @@
 
         function deleteEntry(id) {
             var data = {
-                id: id
+                id:id
             };
             const Url = "http://localhost:3000/admin/deleteEntry";
             $.ajax({
@@ -117,7 +117,7 @@
                 data: data,
                 success: function (res) {
                     evictiondata = res.evictiondata;
-                    $("#dataTable").load("home #dataTable");
+                    $( "#dataTable" ).load( "home #dataTable" );
                     // $("#tableMessage").html("Entry deleted Successfully");
                 }
             });
@@ -125,12 +125,12 @@
         }
 
         function showEntry(id) {
-            const URL = "http://localhost:3000/create/showEntry?id=" + id;
+            const URL = "http://localhost:3000/create/showEntry?id="+id;
             location.href = URL;
         }
 
         function updateEntry(id) {
-            const URL = "http://localhost:3000/create/updateEntry?id=" + id;
+            const URL = "http://localhost:3000/create/updateEntry?id="+id;
             location.href = URL;
         }
     </script>
@@ -162,82 +162,33 @@
     </div>
 </nav>
 
-<section id="signup" style="margin-top: 90px; min-height: 81%;">
+<section id="signup"  style="margin-top: 90px; min-height: 81%;">
     <div class="container-fluid">
-        <div style="font-size: 25px;">User Management</div>
+
         <div class="forms populateData">
+            <span class="title">Populate database</span>
+            <div class="leftside" id="csvfileUpload">
+                <form method="post" enctype="multipart/form-data" action="/admin/add">
+                    <h4 for="csvfile">Please Upload a file to populate the Database. (.xlxs)</h4>
 
-            <div class="">
-                <form class="UserForm" method="get" action="/admin/searchuser">
-                    <h4>Please enter User's Email ID to search</h4>
-                    <div class="">
-                        <label for="tags">Search: </label>
-                        <input id="tags" class="searchuser" name="user"><br/>
-                        <button id="searchUser" class="okButton" type="submit">Submit</button>
-                        <br/>
-                        <script>
-                            var errorMsg;
-                            errorMsg = <%- JSON.stringify(errorMsg) %>;
-                        </script>
-                        <% if(errorMsg != "") { %>
-                        <label class="err alert alert-danger"><%= errorMsg %></label>
-                        <% } %>
-                    </div>
+                    <input type="file" name="csvfile" id="csvfile"><br>
+                    <br/>
+                    <button type="submit" class="okButton">Submit</button>
+                    <label class="msg"><%= message %></label>
+                    <label class="err"><%= error %></label>
                 </form>
-                <script>
-                    var userdata;
-                    userdata = <%- JSON.stringify(userdata) %>;
-                </script>
-                <% if(userdata) { %>
-                <% for (var i = 0; i < userdata.length; i++) {
-                    var username = userdata[i].email;
-                %>
-                <div id="searchResult" style="width: 500px;margin: auto;">
-                    <div class="userRecord">
-                        <span class="userName">
-                            <%= userdata[i].userName %>
-                        </span>
-                        <span class="email" name="email">
-                                <%= userdata[i].email %>
-                        </span>
-                        <span class="phone">
-                                <%= userdata[i].phone %>
-                        </span>
-                        <div style="    text-align: center;">
-                            <span class="delB">
-                            <button class="delete okButton" id="Delete" onclick="deleteuser(event)">Delete</button>
-                        </span>
-                            <span class="editB">
-                            <button class="edit okButton" id="Edit" onclick="edituser(event)">Edit</button>
-                        </span>
-                        </div>
-                    </div>
-                </div>
-                <% } %>
-                <% } %>
-                <div id="editContainer" style="width: 500px;margin: auto;border: 1px solid; padding: 20px;">
-                    <h3>Edit User:</h3>
-                    <div class="inputFields">
-                        <label class="feildName">Email: </label>
-                        <input id="editemail" class="email" name="email" type="text" disabled/>
-                        <label class="error" id="userNameError"></label>
-                    </div>
-                    <div class="inputFields">
-                        <label class="feildName">Name: </label>
-                        <input id="editname" class="name" name="userName" type="text"/>
-                        <label class="error" id="userNameError"></label>
-                    </div>
-                    <div class="inputFields">
-                        <label class="feildName">Phone:</label>
-                        <input id="editNumber" class="phone" name="phone" type="text"/>
-                        <label class="error" id="phoneError"></label>
-                    </div>
-                    <div class="inputFields" style="text-align: center;">
-                        <button class="update okButton" id="Update" onclick="updateuser(event)">Update</button>
-                    </div>
+                <div style="height: 50px;"></div>
+                <form method="post" enctype="multipart/form-data" action="/admin/addUSData">
+                    <h4 for="csvfile">Please upload a file for dashboard</h4>
 
-                </div>
+                    <input type="file" name="USDatafile" id="USDatafile"><br>
+                    <br/>
+                    <button type="submit" class="okButton">Submit</button>
+                    <label class="msg"><%= message %></label>
+                    <label class="err"><%= error %></label>
+                </form>
             </div>
+
         </div>
     </div>
 
