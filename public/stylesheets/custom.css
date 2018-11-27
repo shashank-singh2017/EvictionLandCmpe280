@@ -1,2 +1,20 @@
+.col-md-5.mapdata {
+    background-image: url("./../images/mapdata.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: white;
+}
 
-/** ADD YOUR AWESOME CODES HERE **/
+.col-md-5.cards.ranking {
+    background-image: url("./../images/ranking.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: white;
+}
+
+.col-md-5.compare {
+    background-image: url("./../images/compare.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: white;
+}
