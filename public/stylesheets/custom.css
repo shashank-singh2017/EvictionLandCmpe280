@@ -1,11 +1,11 @@
 .col-md-5.mapdata {
-    background-image: url("./../images/mapdata.jpg");
+    background-image: url("./../images/map.jpg");
     background-repeat: no-repeat;
     background-position: center;
     background-color: white;
 }
 
-.col-md-5.cards.ranking {
+.col-md-5.ranking {
     background-image: url("./../images/ranking.png");
     background-repeat: no-repeat;
     background-position: center;
@@ -14,6 +14,13 @@
 
 .col-md-5.compare {
     background-image: url("./../images/compare.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: white;
+}
+
+.col-md-5.dashboard {
+    background-image: url("./../images/dashboard.png");
     background-repeat: no-repeat;
     background-position: center;
     background-color: white;
