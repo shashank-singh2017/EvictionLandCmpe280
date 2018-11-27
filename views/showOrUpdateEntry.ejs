@@ -87,107 +87,65 @@
     </nav>
 <section id="signup"  style="margin-top: 90px; min-height: 95%;">
     <div class="content">
-        <div class="message"><label><%=message %></label></div>
-        <h2>Eviction Record</h2>
-        <br>
 
-        <form name="evictionForm" action="/create/processUpdateEntry" method="post" onsubmit="return validateEvictionForm()">
+        <form name="signupFormCustomCard" name="signupForm"  action="/create/processUpdateEntry" method="post" onsubmit="return validateEvictionForm()">
             <div class="container">
+                <div class="row">
+                    	<div class="col-md-10 formBox" style="margin-left: 10%;">
+                            <br/>
+                            <h2 style="font-weight: 900; text-align: center">Eviction Record</h2>
+                            <input type="hidden" name="id" class="name" value="<%=data["id"]%>">
 
-                    <div class="row" style="display: none;">
-                        <div class="col-md-3">
-                            <span class="lab">Document Id:</span>
-                        </div>
-                        <div class="col-md-9">
-                            <input type="text" name="id" class="inpField" value="<%=data["id"]%>">
-                        </div>
-                    </div>
-                    <br>
+                            <div class="inputFields">
+                                <span class="lab">State:</span>
 
-                    <div class="row">
-                        <div class="col-md-3">
-                            <span class="lab">State:</span>
-                        </div>
-                        <div class="col-md-9">
-                            <input type="text" name="name" class="inpField" value="<%=data["name"]%>" <%if(update==false){%>disabled<%}%>>
-                        </div>
-                    </div>
-                    <br>
+                                <input type="text" name="name" class="name" value="<%=data["name"]%>" <%if(update==false){%>disabled<%}%>>
+                            </div>
+                            <div class="inputFields">
+                                <span class="lab">Year:</span>
 
-                    <div class="row">
-                        <div class="col-md-3">
-                            <span class="lab">Year:</span>
-                        </div>
-                        <div class="col-md-9">
-                            <input type="number" name="year" class="inpField" value="<%=data["year"]%>" <%if(update==false){%>disabled<%}%>>
-                        </div>
-                    </div>
-                    <br>
+                                <input type="number" name="year" class="name" value="<%=data["year"]%>" <%if(update==false){%>disabled<%}%>>
+                            </div>
 
-                    <div class="row">
-                        <div class="col-md-3">
-                            <span class="lab">Population:</span>
-                        </div>
-                        <div class="col-md-9">
-                            <input type="number" name="population" class="inpField" value="<%=data["population"]%>" <%if(update==false){%>disabled<%}%>>
-                        </div>
-                    </div>
-                    <br>
+                            <div class="inputFields">
+                                <span class="lab">Population:</span>
 
-                    <div class="row">
-                        <div class="col-md-3">
-                            <span class="lab">Poverty Rate:</span>
-                        </div>
-                        <div class="col-md-9">
-                            <input type="number" name="povRate" class="inpField" value="<%=data["poverty-rate"]%>" <%if(update==false){%>disabled<%}%>>
-                        </div>
-                    </div>
+                                <input type="number" name="population" class="name" value="<%=data["population"]%>" <%if(update==false){%>disabled<%}%>>
+                            </div>
+                            <div class="inputFields">
+                                <span class="lab">Poverty Rate:</span>
 
-                    <br>
+                                <input type="number" name="povRate" class="name" value="<%=data["poverty-rate"]%>" <%if(update==false){%>disabled<%}%>>
+                            </div>
 
-                    <div class="row">
-                        <div class="col-md-3">
-                            <span class="lab">Median Gross Rent:</span>
-                        </div>
-                        <div class="col-md-9">
-                            <input type="number" name="MedGrossRent" class="inpField" value="<%=data["median-gross-rent"]%>" <%if(update==false){%>disabled<%}%>>
-                        </div>
-                    </div>
+                            <div class="inputFields">
+                                <span class="lab">Median Gross Rent:</span>
 
-                    <br>
+                                <input type="number" name="MedGrossRent" class="name" value="<%=data["median-gross-rent"]%>" <%if(update==false){%>disabled<%}%>>
+                            </div>
 
-                    <div class="row">
-                        <div class="col-md-3">
-                            <span class="lab">Median Household Income:</span>
-                        </div>
-                        <div class="col-md-9">
-                            <input type="text" name="MedHouseInc" class="inpField" value="<%=data["median-household-income"]%>" <%if(update==false){%>disabled<%}%>>
-                        </div>
-                    </div>
+                            <div class="inputFields">
+                                <span class="lab">Median Household Income:</span>
 
-                    <br>
+                                <input type="text" name="MedHouseInc" class="name" value="<%=data["median-household-income"]%>" <%if(update==false){%>disabled<%}%>>
+                            </div>
 
-                    <div class="row">
-                        <div class="col-md-3">
-                            <span class="lab">Median Property Value:</span>
-                        </div>
-                        <div class="col-md-9">
-                            <input type="text" name="MedianPropValue" class="inpField" value="<%=data["median-property-value"]%>" <%if(update==false){%>disabled<%}%>>
-                        </div>
-                    </div>
-                    <br>
+                            <div class="inputFields">
+                                <span class="lab">Median Property Value:</span>
 
-                    <div class="row">
-                        <div class="col-md-3">
-                            <span class="lab">Rent Burden:</span>
-                        </div>
-                        <div class="col-md-9">
-                            <input type="text" name="RentBurden" class="inpField" value="<%=data["rent-burden"]%>" <%if(update==false){%>disabled<%}%>>
-                        </div>
-                    </div>
+                                <input type="text" name="MedianPropValue" class="name" value="<%=data["median-property-value"]%>" <%if(update==false){%>disabled<%}%>>
+                            </div>
 
-                <br>
+                            <div class="inputFields">
+                                <span class="lab">Rent Burden:</span>
+
+                                <input type="text" name="RentBurden" class="name" value="<%=data["rent-burden"]%>" <%if(update==false){%>disabled<%}%>>
+                            </div>
+
+
                 <input type="submit" class="butt" style="color: white;border-radius: 3px;" value="Update" onclick="sendUpdateRequest()" <%if(update==false){%>hidden<%}%>>
+            </div>
+            </div>
             </div>
         </form>
     </div>

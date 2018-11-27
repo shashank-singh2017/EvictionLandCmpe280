@@ -101,6 +101,7 @@ module.exports.handleSignin = function (req, res) {
 
             //save session into MongoDB
             if (data[0].role == "admin") {
+                req.session.userSession = data;
                 res.redirect('/admin/home');
             }
             else {

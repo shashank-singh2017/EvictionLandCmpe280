@@ -1,10 +1,20 @@
 <html>
 <head>
-    <title>EvictionLand</title>
-    <meta charset="UTF-8">
+
     <title>Create new eviction record</title>
-    <link rel="stylesheet" href="/stylesheets/form.css">
-    <script src="/javascripts/evictionFormValidation.js"></script>
+    <!-- Basic -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+     <!-- Site Metas -->
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Site Icons -->
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
     <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
 
@@ -20,9 +30,10 @@
     <link rel="stylesheet" href="./../stylesheets/responsive.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="./../stylesheets/custom.css">
-	<script src="./../javascripts/modernizr.js"></script> <!-- Modernizr -->
+    <script src="./../javascripts/modernizr.js"></script> <!-- Modernizr -->
+
 </head>
-<body id="page-top" class="politics_version">
+<body id="page-top" class="politics_version background-color-grey">
     <!-- Navigation -->
 
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav" style="background-color: white;height: 60px;border-bottom: 1px solid; border-color: maroon;">
@@ -50,109 +61,71 @@
     </nav>
 
     <section id="signup"  style="margin-top: 90px; min-height: 95%;">
-        <div class="content">
-            <div class="message"><label><%=message %></label></div>
-            <h2>Create new Eviction Record</h2>
-            <br>
-            <form name="evictionForm" action="/create/new" method="post" onsubmit="return validateEvictionForm()">
-                <div class="container">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <span class="lab">State:</span>
-                            </div>
-                            <div class="col-md-9">
-                                <input type="text"  class="inpField" name="name" value="">
-                                <label class="error" id="NameError"></label>
-                            </div>
+        <div class="container">
+            <div class="row">
+        		<div class="col-md-5 formBox">
+                        <br/>
+                        <h2 style="font-weight: 900; text-align: center">Create new Eviction Record</h2>
+
+                    <form name="signupFormCustomCard" name="signupForm" action="/create/new" method="post" onsubmit="return validateEvictionForm()">
+
+                        <div class="inputFields">
+                            <label class="feildName">State: </label>
+                            <input class="name" type="text" name="email" value="">
+                            <label class="error" id="NameError"></label>
                         </div>
 
-                        <br>
-                        <div class="row">
-                            <div class="col-md-3">
-                                <span class="lab">Year:</span>
-                            </div>
-                            <div class="col-md-9">
-                                <input type="number" class="inpField" name="year" value="">
-                                <label class="error" id="yearError"></label>
-                            </div>
+                        <div class="inputFields">
+                            <label class="feildName">Year:</label>
+                            <input type="number" class="name" name="year" value="">
+                            <label class="error" id="yearError"></label>
                         </div>
 
-                        <br>
-                        <div class="row">
-                            <div class="col-md-3">
-                                <span class="lab">Population:</span>
-                            </div>
-                            <div class="col-md-9">
-                                <input type="number" class="inpField" name="population" value="">
-                                <label class="error" id="populationError"></label>
-                            </div>
+                		<div class="inputFields">
+                            <label class="feildName">Population:</label>
+                            <input type="number" class="name" name="population" value="">
+                            <label class="error" id="populationError"></label>
+                          </div>
+
+                        <div class="inputFields">
+                            <label class="feildName">Poverty Rate:</label>
+                            <input type="number" class="name" name="povRate" value="">
+                            <label class="error" id="povRateError"></label>
                         </div>
 
-                        <br>
-                        <div class="row">
-                            <div class="col-md-3">
-                                <span class="lab">Poverty Rate:</span>
-                            </div>
-                            <div class="col-md-9">
-                                <input type="number" class="inpField" name="povRate" value="">
-                                <label class="error" id="povRateError"></label>
-                            </div>
+
+                        <div class="inputFields">
+                            <label class="feildName">Median Gross Rent:</label>
+                            <input type="number" class="name" name="MedGrossRent" value="">
+                            <label class="error" id="MedGrossRentError"></label>
                         </div>
 
-                        <br>
-                        <div class="row">
-                            <div class="col-md-3">
-                                <span class="lab">Median Gross Rent:</span>
-                            </div>
-                            <div class="col-md-9">
-                                <input type="number" class="inpField" name="MedGrossRent" value="">
-                                <label class="error" id="MedGrossRentError"></label>
-                            </div>
+                        <div class="inputFields">
+                            <label class="feildName">Median Household Income:</label>
+                            <input type="text" class="name" name="MedHouseInc" value="">
+                            <label class="error" id="MedHouseIncError"></label>
                         </div>
 
-                        <br>
-                        <div class="row">
-                            <div class="col-md-3">
-                                <span class="lab">Median Household Income:</span>
-                            </div>
-                            <div class="col-md-9">
-                                <input type="text" class="inpField" name="MedHouseInc" value="">
-                                <label class="error" id="MedHouseIncError"></label>
-                            </div>
+                        <div class="inputFields">
+                            <label class="feildName">Median Property Value:</label>
+                            <input type="text" class="name" name="MedianPropValue" value="">
+                            <label class="error" id="MedianPropError"></label>
                         </div>
 
-                        <br>
-                        <div class="row">
-                            <div class="col-md-3">
-                                <span class="lab">Median Property Value:</span>
-                            </div>
-                            <div class="col-md-9">
-                                <input type="text" class="inpField" name="MedianPropValue" value="">
-                                <label class="error" id="MedianPropError"></label>
-                            </div>
+                        <div class="inputFields">
+                            <label class="feildName">Rent Burden:</label>
+                            <input type="text" class="name" name="RentBurden" value="">
+                            <label class="error" id="RentBurdenError"></label>
                         </div>
 
-                        <br>
-                        <div class="row">
-                            <div class="col-md-3">
-                                <span class="lab">Rent Burden:</span>
-                            </div>
-                            <div class="col-md-9">
-                                <input type="text" class="inpField" name="RentBurden" value="">
-                                <label class="error" id="RentBurdenError"></label>
-                            </div>
-                        <div>
-                        <br>
-                        <div class="row">
-                            <div class="col-md-1">
-                            </div>
-                            <div class="col-md-2">
-                                <input type="submit" value="Submit" class="butt" style="color: white;border-radius: 3px;">
-                            </div>
+                        <br/>
+                        <div class="inputFields" style="text-align: center">
+                            <input class="btn btn-primary" type="submit" value="Submit" style="background:maroon;"/>
                         </div>
 
-                </div>
-            </form>
+                    </form>
+        		</div>
+            </div>
         </div>
     </section>
 
@@ -165,5 +138,19 @@
             </div>
         </div><!-- end container -->
     </div><!-- end copyrights -->
+
+    <!-- ALL JS FILES -->
+    <script src="./../javascripts/all.js"></script>
+    <!-- Camera Slider -->
+    <script src="./../javascripts/jquery.mobile.customized.min.js"></script>
+    <script src="./../javascripts/jquery.easing.1.3.js"></script>
+    <script src="./../javascripts/parallaxie.js"></script>
+    <script src="./../javascripts/headline.js"></script>
+    <!-- Contact form JavaScript -->
+    <script src="./../javascripts/jqBootstrapValidation.js"></script>
+    <!-- <script src="./../javascripts/contact_me.js"></script> -->
+    <!-- ALL PLUGINS -->
+    <!-- <script src="./../javascripts/custom.js"></script> -->
+    <script src="./../javascripts/jquery.vide.js"></script>
 </body>
 </html>
