@@ -41,8 +41,10 @@ module.exports.bulkupload = function (req, res) {
         console.log(typeof results[0]._id.toString());
 
         res.render('../views/landing_bulkupload', {
-            message: "",
-            error: "",
+            message1: "",
+            message2: "",
+            error1: "",
+            error2: "",
             errorMsg: "",
             userdata: [],
             evictiondata: results
@@ -104,17 +106,21 @@ module.exports.handleAddDocument = function (req, res) {
             cases.insert(statesJsonArray).then((dataInserted) => {
                 console.log("Data inserted into the database.");
 
-                res.render('../views/landing', {
-                    message: "Data Inserted successfully",
-                    error: "",
+                res.render('../views/landing_bulkupload', {
+                    message1: "Data Inserted successfully",
+                    message2 : "",
+                    error1: "",
+                    error2: "",
                     errorMsg: "",
                     "userdata": []
                 });
             }).catch((err) => {
                 console.log("Error occured while inserting data into the database");
-                res.render('../views/landing', {
-                    message: "",
-                    error: "Backend Error: Unable to insert data into database",
+                res.render('../views/landing_bulkupload', {
+                    message1: "",
+                    message2: "",
+                    error1: "Backend Error: Unable to insert data into database",
+                    error2 : "",
                     errorMsg: "",
                     "userdata": []
                 });
@@ -125,9 +131,11 @@ module.exports.handleAddDocument = function (req, res) {
         ;
 
     } else {
-        res.render('../views/landing', {
-            message: "",
-            error: "File is not in the required format",
+        res.render('../views/landing_bulkupload', {
+            message1: "",
+            message2: "",
+            error1: "File is not in the required format",
+            error2 : "",
             errorMsg: "",
             "userdata": []
         });
@@ -259,17 +267,21 @@ module.exports.handleAddUSDocument = function (req, res) {
             cases.insert(statesJsonArray).then((dataInserted) => {
                 console.log("Data inserted into the database.");
 
-                res.render('../views/landing', {
-                    message: "Data Inserted successfully",
-                    error: "",
+                res.render('../views/landing_bulkupload', {
+                    message1: "",
+                    message2: "Data Inserted successfully",
+                    error1: "",
+                    error2 : "",
                     errorMsg: "",
                     "userdata": []
                 });
             }).catch((err) => {
                 console.log("Error occured while inserting data into the database");
-                res.render('../views/landing', {
-                    message: "",
-                    error: "Backend Error: Unable to insert data into database",
+                res.render('../views/landing_bulkupload', {
+                    message1: "",
+                    message2: "",
+                    error1: "",
+                    error2 : "Backend Error: Unable to insert data into database",
                     errorMsg: "",
                     "userdata": []
                 });
@@ -279,9 +291,11 @@ module.exports.handleAddUSDocument = function (req, res) {
         })
         ;
     } else {
-        res.render('../views/landing', {
-            message: "",
-            error: "File is not in the required format",
+        res.render('../views/landing_bulkupload', {
+            message1: "",
+            message2: "",
+            error1: "",
+            error2 : "File is not in the required format",
             errorMsg: "",
             "userdata": []
         });

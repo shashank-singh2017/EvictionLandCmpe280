@@ -172,17 +172,17 @@
 
             <div class="leftside" id="csvfileUpload" style="margin-left: 0px;width: 100%;">
                 <div class="row">
-                    <div class="col-md-5" style="margin-left: 5%;border: 1px solid;height: 230px;padding:60px; border-radius: 5px;">
+                    <!--div class="col-md-5" style="margin-left: 5%;border: 1px solid;height: 230px;padding:60px; border-radius: 5px;">
                         <form method="post" enctype="multipart/form-data" action="/admin/add">
                             <h4 style="font-weight: 700;" for="csvfile">Please Upload a file to populate the Database. (.xlxs)</h4>
 
                             <input type="file" name="csvfile" id="csvfile"><br>
                             <br/>
                             <button type="submit" class="okButton">Submit</button>
-                            <label class="msg"><%= message %></label>
-                            <label class="err"><%= error %></label>
+                            <label class="msg"><%= message1 %></label>
+                            <label class="err err1"><%= error1 %></label>
                         </form>
-                    </div>
+                    </div-->
                 <br/>
                 <div class="col-md-5" style="margin-left: 5%;border: 1px solid;height: 230px;padding:60px; border-radius: 5px;">
                     <form method="post" enctype="multipart/form-data" action="/admin/addUSData">
@@ -191,8 +191,8 @@
                         <input type="file" name="USDatafile" id="USDatafile"><br>
                         <br/>
                         <button type="submit" class="okButton">Submit</button>
-                        <label class="msg"><%= message %></label>
-                        <label class="err"><%= error %></label>
+                        <label class="msg"><%= message2 %></label>
+                        <label class="err err2"><%= error2 %></label>
                     </form>
                 </div>
             </div>

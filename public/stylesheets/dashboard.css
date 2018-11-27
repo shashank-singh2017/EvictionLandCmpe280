@@ -372,3 +372,15 @@ div#rentline {
 #piechart svg{
     margin-left: 79px;
 }
+
+#drop{
+    margin-right: 78px;
+    font-size: 20px;
+    border: 2px solid gray;
+}
+
+#variables.menu-ui {
+    position: absolute;
+    top: -9px;
+    right: 9px;
+}
