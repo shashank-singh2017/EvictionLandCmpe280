@@ -106,13 +106,13 @@ module.exports.fetchDataByState = function (req, res) {
                 const rankings = db.get('reportedCases');
                 var rankingsJsonArray = [];
 
-                rankings.find({}, {sort: {State_Reported_Cases: -1}, limit: 3}).then((results) => {
+                cases.find({"year":2016 }, {sort: {evictions: -1}, limit: 3}).then((results) => {
                     for (var i = 0; i < results.length; i++) {
                         rankingsJsonArray.push({
                             rank: i + 1,
-                            state: results[i].state,
-                            county: results[i].county,
-                            case_numbers: results[i].case_numbers
+                            state: results[i].name,
+                            county: results[i].name,
+                            case_numbers: results[i].evictions
                         });
                     }
 

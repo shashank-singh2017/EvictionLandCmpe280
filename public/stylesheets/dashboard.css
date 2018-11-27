@@ -1,11 +1,11 @@
-#chart1 svg{
+#chart1 svg {
     border: 1px solid black;
     margin: 30px;
     padding: 30px;
     height: 325px;
 }
 
-#chart2 svg{
+#chart2 svg {
     border: 1px solid black;
     margin: 30px;
     padding: 30px;
@@ -13,7 +13,7 @@
     width: 500px;
 }
 
-#chart1, #chart2{
+#chart1, #chart2 {
     display: inline-block;
 }
 
@@ -32,8 +32,8 @@ g.nv-y.nv-axis.nvd3-svg {
     stroke-opacity: 0.75;
 }
 
-.nvtooltip{
-   display: none;
+.nvtooltip {
+    display: none;
 }
 
 #chart1 svg {
@@ -61,38 +61,37 @@ g.nv-y.nv-axis.nvd3-svg {
 }
 
 /*.nv-axisMaxMin{*/
-    /*font-size: smaller;*/
+/*font-size: smaller;*/
 /*}*/
 
 /*#linechart svg {*/
-    /*border: 1px solid black;*/
-    /*margin: 30px;*/
-    /*padding: 30px;*/
-    /*height: 325px;*/
-    /*width: 325px;*/
+/*border: 1px solid black;*/
+/*margin: 30px;*/
+/*padding: 30px;*/
+/*height: 325px;*/
+/*width: 325px;*/
 /*}*/
 
 /*#linechart{*/
-    /*display: inline-block;*/
+/*display: inline-block;*/
 /*}*/
 
 /*#piechart svg {*/
-    /*border: 1px solid black;*/
-    /*margin: 30px;*/
-    /*padding: 30px;*/
-    /*height: 325px;*/
-    /*width: 325px;*/
+/*border: 1px solid black;*/
+/*margin: 30px;*/
+/*padding: 30px;*/
+/*height: 325px;*/
+/*width: 325px;*/
 /*}*/
 
 /*#piechart{*/
-    /*display: inline-block;*/
+/*display: inline-block;*/
 /*}*/
-
 
 /* Legend Position Style */
 .legend {
-    position:absolute;
-    left:20px;
+    position: absolute;
+    left: 20px;
 }
 
 .axis text {
@@ -114,7 +113,6 @@ body {
 #map {
     margin-top: -49px;
 }
-
 
 .axis {
     font: 10px sans-serif;
@@ -148,11 +146,10 @@ body {
 .hover-line {
     stroke: #6F257F;
     stroke-width: 2px;
-    stroke-dasharray: 3,3;
+    stroke-dasharray: 3, 3;
 }
 
-
-.pieChart{
+.pieChart {
     font-size: 16px;
 }
 
@@ -168,11 +165,11 @@ body {
     margin: 20px 0 20px 0;
 }
 
-#map{
+#map {
     display: inline-block;
 }
 
-#line{
+#line {
     display: inline-block;
     margin-left: 0px;
 }
@@ -193,7 +190,6 @@ span.Charttitle {
 .legendPie {
     text-align: center;
     font-size: 14px;
-
 
 }
 
@@ -217,8 +213,7 @@ span.BP {
     fill: #D1BCD6;
 }
 
-
-#graphic .x-axis path,#graphic .y-axis path {
+#graphic .x-axis path, #graphic .y-axis path {
     display: none;
 }
 
@@ -268,7 +263,7 @@ span.BP {
 .grid-line {
     stroke: black;
     opacity: 0.2;
-    stroke-dasharray: 2,2;
+    stroke-dasharray: 2, 2;
 }
 
 .end-label {
@@ -280,7 +275,7 @@ span.BP {
 }
 
 .stateTitle {
-   // padding: 25px;
+/ / padding: 25 px;
     font-size: 18px;
 }
 
@@ -288,7 +283,7 @@ span.BP {
     width: 125px;
     height: 125px;
     border-radius: 50%;
-    font-size: 60px;
+    font-size: 51px;
     color: #fff;
     line-height: 100px;
     text-align: center;
@@ -297,7 +292,7 @@ span.BP {
     vertical-align: top;
 }
 
-.stateTitle .state{
+.stateTitle .state {
     font-size: 50px;
     text-align: center;
 
@@ -311,7 +306,7 @@ span.BP {
     width: 219px;
 }
 
-.tooltip.in{
+.tooltip.in {
     font-size: 15px;
     margin-top: -10px;
     margin-left: 40px;
@@ -323,7 +318,7 @@ span.BP {
     visibility: visible;
 }
 
-.tooltip.out{
+.tooltip.out {
     visibility: hidden;
 }
 
@@ -357,4 +352,23 @@ rect.bar.firstBar {
 
 div#rentline {
     margin-top: -50px;
+}
+
+.card-custom-shadow {
+    background-color: white;
+    box-shadow: 0 10px 15px 0 rgba(0, 0, 0, 0.2);
+}
+
+.background-color-grey {
+    padding-top: 70px;
+    min-height: 81%;
+    background-color: #F8F8F8;
+}
+
+#map svg{
+    margin-top: -60px;
+}
+
+#piechart svg{
+    margin-left: 79px;
 }
