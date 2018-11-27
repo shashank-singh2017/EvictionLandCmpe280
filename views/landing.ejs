@@ -149,13 +149,13 @@
               <a class="links" href="#" style="color:white;">Home</a>
             </li>
             <li style="color: black; margin-left: 30px;">
-              <a class="links" href="#" style="color:white;">About Us</a>
+              <a class="links" href="#" style="color:white;">Bulk Upload</a>
             </li>
             <li style="color: black; margin-left: 30px;">
-              <a class="links " href="#" style="color:white;">Services</a>
+              <a class="links " href="/admin/usermanage" style="color:white;">User Management</a>
             </li>
 			<li style="color: black; margin-left: 30px;">
-              <a class="links" href="#" style="color:white;">Our Team</a>
+              <a class="links" href="/users/logout" style="color:white;">Logout</a>
             </li>
           </ul>
         </div>
@@ -262,68 +262,7 @@
                         <label class="err"><%= error %></label>
                     </form>
                 </div>
-                <div class="rightside">
-                    <form class="UserForm" method="get" action="/admin/searchuser">
-                        <h4>Please enter User's Email ID to search</h4>
-                        <div class="">
-                            <label for="tags">Search: </label>
-                            <input id="tags" class="searchuser" name="user"><br/>
-                            <button id="searchUser" class="okButton" type="submit">Submit</button>
-                            <br/>
-                            <label class="err"><%= errorMsg %></label>
-                        </div>
-                    </form>
-                    <script>
-                        var userdata;
-                        userdata = <%- JSON.stringify(userdata) %>;
-                    </script>
-                    <% if(userdata) { %>
-                    <% for (var i = 0; i < userdata.length; i++) {
-                        var username = userdata[i].email;
-                    %>
-                    <div id="searchResult">
-                        <div class="userRecord">
-                            <span class="userName">
-                                <%= userdata[i].userName %>
-                            </span>
-                            <span class="email" name="email">
-                                <%= userdata[i].email %>
-                            </span>
-                            <span class="phone">
-                                <%= userdata[i].phone %>
-                            </span>
-                            <span class="delB">
-                                <button class="delete" id="Delete" onclick="deleteuser(event)">Delete</button>
-                            </span>
-                            <span class="editB">
-                                <button class="edit" id="Edit" onclick="edituser(event)">Edit</button>
-                            </span>
-                        </div>
-                    </div>
-                    <% } %>
-                    <% } %>
-                    <div id="editContainer">
-                        <div class="inputFields">
-                            <label class="feildName">Email: </label>
-                            <input id="editemail" class="email" name="email" type="text" disabled/>
-                            <label class="error" id="userNameError"></label>
-                        </div>
-                        <div class="inputFields">
-                            <label class="feildName">Name: </label>
-                            <input id="editname" class="name" name="userName" type="text"/>
-                            <label class="error" id="userNameError"></label>
-                        </div>
-                        <div class="inputFields">
-                            <label class="feildName">Phone:</label>
-                            <input id="editNumber" class="phone" name="phone" type="text"/>
-                            <label class="error" id="phoneError"></label>
-                        </div>
-                        <div class="inputFields">
-                            <button class="update okButton" id="Update" onclick="updateuser(event)">Update</button>
-                        </div>
-
-                    </div>
-                </div>
+              
             </div>
         </div>
 

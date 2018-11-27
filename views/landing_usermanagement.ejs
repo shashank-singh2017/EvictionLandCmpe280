@@ -1,0 +1,259 @@
+<html>
+<meta charset="utf-8">
+
+<head>
+    <link href="/stylesheets/jquery-ui.css" rel="stylesheet">
+    <link href="/stylesheets/admin.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="/javascripts/domModify.js"></script>
+    <script src="/external/jquery/jquery.js"></script>
+    <script src="/javascripts/jquery-ui.js"></script>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>
+    <script src="/javascripts/color.jquery.js"></script>
+    <script src="/javascripts/jquery.usmap.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.2/d3.min.js" charset="utf-8"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400, 700" rel="stylesheet">
+    <!-- Site Icons -->
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon"/>
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="./../stylesheets/bootstrap.min.css">
+
+    <link rel="stylesheet" href="./../stylesheets/font-awesome.min.css">
+    <!-- Site CSS -->
+    <link rel="stylesheet" href="./../stylesheets/style.css">
+
+    <link rel="stylesheet" href="./../stylesheets/form.css">
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="./../stylesheets/responsive.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./../stylesheets/custom.css">
+    <script>
+        setTimeout(function () {
+            $("#editContainer").hide();
+        }, 10);
+
+        function deleteuser(event) {
+            var email = event.currentTarget.closest(".userRecord").querySelector(".email").innerText;
+            console.log(email);
+            const Url = "http://localhost:3000/admin/deleteUser?user=" + email;
+            $.ajax({
+                type: "POST",
+                url: Url,
+                data: {
+                    user: email
+                },
+                success: function (res) {
+                    $('#searchResult').html("<div class='alert alert-success' style='font-size: 25px;'>User is deleted from the database.</div>");
+                }
+            });
+        }
+
+        function SearchEviction(event) {
+            var state = document.getElementById("stateEntered").value;
+            const Url = "http://localhost:3000/admin/showEvictionByState";
+            if (state) {
+                $.ajax({
+                    type: "GET",
+                    url: Url,
+                    data: {
+                        state: state
+                    },
+                    success: function (res) {
+                        $("body").html(res)
+                    }
+                });
+            }
+        }
+
+        function edituser(event) {
+            $("#editContainer").show();
+            var email = event.currentTarget.closest(".userRecord").querySelector(".email").innerText;
+            var userName = event.currentTarget.closest(".userRecord").querySelector(".userName").innerText;
+            var phone = event.currentTarget.closest(".userRecord").querySelector(".phone").innerText;
+            document.getElementById("editname").value = userName;
+            document.getElementById("editNumber").value = phone;
+            document.getElementById("editemail").value = email;
+        }
+
+        function updateuser(event) {
+            var username = document.getElementById("editname").value;
+            var number = document.getElementById("editNumber").value;
+            var email = document.getElementById("editemail").value;
+            if (username == "" || number == "") {
+
+            } else {
+                var data = {
+                    username: username,
+                    number: number,
+                    email: email
+                };
+                const Url = "http://localhost:3000/admin/updateUser";
+                $.ajax({
+                    type: "POST",
+                    url: Url,
+                    data: data,
+                    success: function (res) {
+                        $('#searchResult').html("<div class='alert alert-success' style='font-size: 25px;'>User details are updated to the database.</div>");
+                        document.getElementById("editContainer").style.display = "none";
+                    }
+                });
+            }
+        }
+
+        function deleteEntry(id) {
+            var data = {
+                id: id
+            };
+            const Url = "http://localhost:3000/admin/deleteEntry";
+            $.ajax({
+                type: "DELETE",
+                url: Url,
+                data: data,
+                success: function (res) {
+                    evictiondata = res.evictiondata;
+                    $("#dataTable").load("home #dataTable");
+                    // $("#tableMessage").html("Entry deleted Successfully");
+                }
+            });
+
+        }
+
+        function showEntry(id) {
+            const URL = "http://localhost:3000/create/showEntry?id=" + id;
+            location.href = URL;
+        }
+
+        function updateEntry(id) {
+            const URL = "http://localhost:3000/create/updateEntry?id=" + id;
+            location.href = URL;
+        }
+    </script>
+</head>
+
+
+<body id="page-top" class="politics_version" style="background-color: white;">
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav" style="background-color: #303636;height: 60px;">
+    <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top">
+            <h2 class="logo">EvictionLand</h2>
+        </a>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav text-uppercase ml-auto">
+                <li style="color: black; margin-left: 30px;">
+                    <a class="links" href="/admin/home" style="color:white;">Home</a>
+                </li>
+                <li style="color: black; margin-left: 30px;">
+                    <a class="links" href="#" style="color:white;">Bulk Upload</a>
+                </li>
+                <li style="color: black; margin-left: 30px;">
+                    <a class="links " href="/admin/usermanage" style="color:white;">User Management</a>
+                </li>
+                <li style="color: black; margin-left: 30px;">
+                    <a class="links" href="/users/logout" style="color:white;">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<section id="signup" style="margin-top: 90px; min-height: 81%;">
+    <div class="container-fluid">
+        <div style="font-size: 25px;">User Management</div>
+        <div class="forms populateData">
+
+            <div class="">
+                <form class="UserForm" method="get" action="/admin/searchuser">
+                    <h4>Please enter User's Email ID to search</h4>
+                    <div class="">
+                        <label for="tags">Search: </label>
+                        <input id="tags" class="searchuser" name="user"><br/>
+                        <button id="searchUser" class="okButton" type="submit">Submit</button>
+                        <br/>
+                        <script>
+                            var errorMsg;
+                            errorMsg = <%- JSON.stringify(errorMsg) %>;
+                        </script>
+                        <% if(errorMsg != "") { %>
+                        <label class="err alert alert-danger"><%= errorMsg %></label>
+                        <% } %>
+                    </div>
+                </form>
+                <script>
+                    var userdata;
+                    userdata = <%- JSON.stringify(userdata) %>;
+                </script>
+                <% if(userdata) { %>
+                <% for (var i = 0; i < userdata.length; i++) {
+                    var username = userdata[i].email;
+                %>
+                <div id="searchResult" style="width: 500px;margin: auto;">
+                    <div class="userRecord">
+                        <span class="userName">
+                            <%= userdata[i].userName %>
+                        </span>
+                        <span class="email" name="email">
+                                <%= userdata[i].email %>
+                        </span>
+                        <span class="phone">
+                                <%= userdata[i].phone %>
+                        </span>
+                        <div style="    text-align: center;">
+                            <span class="delB">
+                            <button class="delete okButton" id="Delete" onclick="deleteuser(event)">Delete</button>
+                        </span>
+                            <span class="editB">
+                            <button class="edit okButton" id="Edit" onclick="edituser(event)">Edit</button>
+                        </span>
+                        </div>
+                    </div>
+                </div>
+                <% } %>
+                <% } %>
+                <div id="editContainer" style="width: 500px;margin: auto;border: 1px solid; padding: 20px;">
+                    <h3>Edit User:</h3>
+                    <div class="inputFields">
+                        <label class="feildName">Email: </label>
+                        <input id="editemail" class="email" name="email" type="text" disabled/>
+                        <label class="error" id="userNameError"></label>
+                    </div>
+                    <div class="inputFields">
+                        <label class="feildName">Name: </label>
+                        <input id="editname" class="name" name="userName" type="text"/>
+                        <label class="error" id="userNameError"></label>
+                    </div>
+                    <div class="inputFields">
+                        <label class="feildName">Phone:</label>
+                        <input id="editNumber" class="phone" name="phone" type="text"/>
+                        <label class="error" id="phoneError"></label>
+                    </div>
+                    <div class="inputFields" style="text-align: center;">
+                        <button class="update okButton" id="Update" onclick="updateuser(event)">Update</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+</section>
+
+<div class="copyrights" style="height: 80px;">
+    <div class="container">
+        <div class="footer-distributed" style="float: left;">
+            <div class="footer-right">
+                <p class="footer-company-name">All Rights Reserved. &copy; 2018 <a href="#">EvictionLand</a>
+            </div>
+        </div>
+    </div><!-- end container -->
+</div><!-- end copyrights -->
+
+<a href="#" id="scroll-to-top" class="dmtop global-radius"><i class="fa fa-angle-up"></i></a>
+
+</body>

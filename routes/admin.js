@@ -22,6 +22,8 @@ var upload = multer({storage: storage});
 
 router.get('/home', adminController.home);
 
+router.get('/usermanage', adminController.usermanagement);
+
 router.post('/add', upload.single("csvfile"), adminController.handleAddDocument);
 
 router.get('/searchuser', adminController.searchUser);
