@@ -20,6 +20,38 @@ module.exports.home = function (req, res) {
 
 };
 
+module.exports.usermanagement = function (req, res) {
+    const cases = db.get('USData');
+    cases.find().then((results) => {
+        console.log(typeof results[0]._id.toString());
+
+        res.render('../views/landing_usermanagement', {
+            message: "",
+            error: "",
+            errorMsg: "",
+            userdata: [],
+            evictiondata: results
+        });
+    });
+};
+
+module.exports.bulkupload = function (req, res) {
+    const cases = db.get('USData');
+    cases.find().then((results) => {
+        console.log(typeof results[0]._id.toString());
+
+        res.render('../views/landing_bulkupload', {
+            message: "",
+            error: "",
+            errorMsg: "",
+            userdata: [],
+            evictiondata: results
+        });
+    });
+};
+
+
+
 module.exports.showEvictionByState = function (req, res) {
     const state = req.query.state;
     console.log("Search: " + state);
@@ -106,10 +138,11 @@ module.exports.searchUser = function (req, res) {
     const selectedUser = req.query.user;
     console.log(selectedUser);
     if (!selectedUser || selectedUser == "") {
-        res.render('../views/landing', {
+        res.render('../views/landing_usermanagement', {
             'data': "",
             "userdata": [],
             'selected': selectedUser,
+            evictiondata : [],
             message: "",
             error: "",
             errorMsg: "Please enter user's email id."
@@ -119,10 +152,11 @@ module.exports.searchUser = function (req, res) {
     collection.find({"email": selectedUser}).then((data) => {
         console.log("Length : ", data.length);
         if (data.length === 0) {
-            res.render('../views/landing', {
+            res.render('../views/landing_usermanagement', {
                 'data': "",
                 'userdata': [],
                 'selected': selectedUser,
+                evictiondata : [],
                 message: "",
                 error: "",
                 errorMsg: "User not found"
@@ -130,9 +164,10 @@ module.exports.searchUser = function (req, res) {
         }
         else {
             console.log(data);
-            res.render('../views/landing', {
+            res.render('../views/landing_usermanagement', {
                 'userdata': data,
                 'selected': selectedUser,
+                evictiondata : [],
                 message: "",
                 error: "",
                 errorMsg: ""
@@ -163,7 +198,7 @@ module.exports.deleteUser = function (req, res) {
         }
         else {
             collection.remove({"email": email}).then((data) => {
-                res.render('../views/landing', {
+                res.render('../views/landing_usermanagement', {
                     'userdata': data,
                     'selected': email,
                     message: "",
@@ -199,7 +234,7 @@ module.exports.updateUser = function (req, res) {
             var newvalues = {$set: {userName: req.body.username, phone: req.body.number}};
             collection.update({"email": email}, newvalues).then((data) => {
                 console.log(data);
-                res.render('../views/landing', {
+                res.render('../views/landing_usermanagement', {
                     'userdata': [],
                     'selected': email,
                     message: "",
