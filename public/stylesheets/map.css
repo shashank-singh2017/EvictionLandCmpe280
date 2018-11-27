@@ -63,7 +63,7 @@ tr {
 
 .card.col-sm-3.col-6 {
     padding-top: 10px;
-    background-color: #C3CDE6;
+    /* background-color: #C3CDE6; */
     margin-left: 60px;
     margin-bottom: 20px;
 }
@@ -71,4 +71,9 @@ tr {
 .card-header.border.border-primary {
     color: maroon;
     background: white;
+}
+
+.card-header {
+    background-color: #353839;
+    color: white;
 }
