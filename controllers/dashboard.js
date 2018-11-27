@@ -65,7 +65,7 @@ module.exports.fetchDataByState = function (req, res) {
                             rate: "Rent burden"
                         });
                         values.push({
-                            value: results1[i]["eviction-rate"],
+                            value: results1[i]["evictionRate"],
                             rate: "Eviction rate"
                         });
                         stackedChartData.push({
@@ -77,27 +77,27 @@ module.exports.fetchDataByState = function (req, res) {
                     if (results1[i].year == 2016) {
                         populationVariation.push({
                             "label": "White",
-                            "value": results1[i]["pct-white"]
+                            "value": results1[i]["white"]
                         });
 
                         populationVariation.push({
                             "label": "African American",
-                            "value": results1[i]["pct-af-am"]
+                            "value": results1[i]["afam"]
                         });
 
                         populationVariation.push({
                             "label": "Hispanic/Latinx",
-                            "value": results1[i]["pct-hispanic"]
+                            "value": results1[i]["hispanic"]
                         });
 
                         populationVariation.push({
                             "label": "Asian",
-                            "value": results1[i]["pct-asian"]
+                            "value": results1[i]["asian"]
                         });
 
                         populationVariation.push({
                             "label": "Other",
-                            "value": results1[i]["pct-am-ind"] + results1[i]["pct-nh-pi"] + results1[i]["pct-multiple"] + results1[i]["pct-other"]
+                            "value": results1[i]["amind"] + results1[i]["nhpi"] + results1[i]["multiple"] + results1[i]["other"]
                         });
                     }
                 }
@@ -121,7 +121,7 @@ module.exports.fetchDataByState = function (req, res) {
                     cases.find({"year": 2016}, {sort: {evictions: -1}}).then((results2) => {
                         for (var i = 0; i < results2.length; i++) {
                             if (results2[i].name == selectedState) {
-                                rank = i;
+                                rank = i+ 1;
                                 evictionRate = results2[i].evictions;
                             }
                         }
