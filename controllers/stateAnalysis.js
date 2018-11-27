@@ -30,7 +30,8 @@ module.exports.fetchData = function (req, res) {
                 'evictionGeoJSON': evictionGeoJSON,
                 'usData':results,
                 'trendLine': dataAllYearsOfState,
-                'propLine': propData
+                'propLine': propData,
+                'state': "California"
             });
         });
 
@@ -58,7 +59,8 @@ module.exports.getDataByState = function (req, res) {
 
         res.json({
             'trendLine': dataAllYearsOfState,
-            'propLine': propData
+            'propLine': propData,
+            'state': state
         });
     });
 

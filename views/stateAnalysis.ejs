@@ -51,71 +51,72 @@
     }
 </style>
 
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav" style="background-color: white;height: 60px;border-bottom: 1px solid; border-color: maroon;">
-      <div class="container">
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav" style="background-color: white;height: 60px;border-bottom: 1px solid; border-color: maroon;">
+    <div class="container">
         <a class="navbar-brand js-scroll-trigger" href="#page-top">
             <h2 class="logo">EvictionLand</h2>
         </a>
         <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ml-auto" style="font-family: sans-serif;">
-            <li style="color: black; margin-left: 30px;">
-              <a class="links" href="#" style="color:maroon;font-size:16px;">Home</a>
-            </li>
-            <li style="color: black; margin-left: 30px;">
-              <a class="links" href="#" style="color:maroon;font-size:16px;">About Us</a>
-            </li>
-            <li style="color: black; margin-left: 30px;">
-              <a class="links " href="#" style="color:maroon;font-size:16px;">Services</a>
-            </li>
-            <li style="color: black; margin-left: 30px;">
-              <a class="links" href="#" style="color:maroon;font-size:16px;">Our Team</a>
-              </li>
-          </ul>
+            <ul class="navbar-nav ml-auto" style="font-family: sans-serif;">
+                <li style="color: black; margin-left: 30px;">
+                    <a class="links" href="#" style="color:maroon;font-size:16px;">Home</a>
+                </li>
+                <li style="color: black; margin-left: 30px;">
+                    <a class="links" href="#" style="color:maroon;font-size:16px;">About Us</a>
+                </li>
+                <li style="color: black; margin-left: 30px;">
+                    <a class="links " href="#" style="color:maroon;font-size:16px;">Services</a>
+                </li>
+                <li style="color: black; margin-left: 30px;">
+                    <a class="links" href="#" style="color:maroon;font-size:16px;">Our Team</a>
+                </li>
+            </ul>
         </div>
-      </div>
-    </nav>
+    </div>
+</nav>
 
-    <section id="signup"  style="margin-top: 90px;">
-        <div class="container-fluid">
-            <div class="row">
+<section id="signup"  style="margin-top: 90px;">
+    <div class="container-fluid">
+        <div class="row">
 
-                <div class="col-md-12" style="min-height: 500px;">
-                    <div id="map" style="margin-left: 50px;width: 90%;"></div>
-                    <div id='variables' class='menu-ui'></div>
-                </div>
-
-            </div>
-            <br/>
-            <div class="row" style="margin-left: 20px;">
-
-                <div class="card-custom-shadow" style="border: 1px solid; margin-left: 30px;width: 45%;margin-bottom: 20px;">
-                    <span class="Charttitle">Eviction trendline from 2000 to 2016</span>
-                    <div id="line">
-                        <svg width="400" height="250"></svg>
-                    </div>
-                </div>
-                <div class="card-custom-shadow" style="border: 1px solid; margin-left: 31px;width: 45%;margin-bottom: 20px;">
-                    <span class="Charttitle" style="text-align: center;">Analysis from 2000 to 2016 </span>
-                    <div id="lineprop">
-                        <svg width="400" height="250"></svg>
-                    </div>
-                </div>
-
-
+            <div class="col-md-12" style="min-height: 500px;">
+                <div id="map" style="margin-left: 50px;width: 90%;"></div>
+                <div id='variables' class='menu-ui'></div>
             </div>
 
         </div>
-    </section>
+        <br/>
+        <div id="stateSpan" style="font-size: 30px; color: black; text-align: center"></div>
+        <div class="row" style="margin-left: 20px;">
 
-    <div class="copyrights" style="height: 80px;">
-        <div class="container">
-            <div class="footer-distributed" style="float: left;">
-                <div class="footer-right">
-                    <p class="footer-company-name">All Rights Reserved. &copy; 2018 <a href="#">EvictionLand</a>
+            <div class="card-custom-shadow" style="border: 1px solid; margin-left: 30px;width: 650px;margin-bottom: 20px;">
+                <span class="Charttitle">Eviction trend line from 2000 to 2016</span>
+                <div id="line">
+                    <svg width="400" height="250"></svg>
                 </div>
             </div>
-        </div><!-- end container -->
-    </div><!-- end copyrights -->
+            <div class="card-custom-shadow" style="border: 1px solid; margin-left: 66px;width: 650px;margin-bottom: 20px;">
+                <span id="propSpan" class="Charttitle" style="text-align: center;">Population trend line from 2000 to 2016 </span>
+                <div id="lineprop">
+                    <svg width="400" height="250"></svg>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+</section>
+
+<div class="copyrights" style="height: 80px;">
+    <div class="container">
+        <div class="footer-distributed" style="float: left;">
+            <div class="footer-right">
+                <p class="footer-company-name">All Rights Reserved. &copy; 2018 <a href="#">EvictionLand</a>
+            </div>
+        </div>
+    </div><!-- end container -->
+</div><!-- end copyrights -->
 
 <!-- jQuery is required for this example. -->
 <script src='https://code.jquery.com/jquery-1.11.0.min.js'></script>
@@ -142,12 +143,22 @@
         'rent-burden'
     ];
 
+    var dict = {
+        'population': "Population",
+        'poverty-rate': "Poverty Rate",
+        'pct-renter-occupied': "Renters Occupied",
+        'median-gross-rent': "Median Gross Rent",
+        'median-property-value': "Median Property Value",
+        'rent-burden': "Rent Burden"
+    }
+
     // Collect the range of each variable over the full set, so
     // we know what to color the brightest or darkest.
     var ranges = {};
     var $select = $('<select id="drop"></select>')
         .appendTo($('#variables'))
         .on('change', function() {
+            document.getElementById("propSpan").innerHTML = dict[$(this).val()]+" trend line from 2000 to 2016";
             setVariable($(this).val());
             searchEviction(state, $(this).val());
         });
@@ -155,7 +166,7 @@
     for (var i = 0; i < variables.length; i++) {
         ranges[variables[i]] = { min: Infinity, max: -Infinity };
         $('<option></option>')
-            .text(variables[i])
+            .text(dict[variables[i]])
             .attr('value', variables[i])
             .appendTo($select);
     }
@@ -165,7 +176,9 @@
     var yearDataForState = <%- JSON.stringify(trendLine)%>
     var propData = <%- JSON.stringify(propLine)%>
     var selectedProp = $("#drop").val();
+    var state = <%-JSON.stringify(state)%>
 
+        document.getElementById("stateSpan").innerHTML = state;
     bubbleData(evictionJSON);
     addLine(yearDataForState);
     addLineProp(propData, selectedProp);
@@ -240,7 +253,7 @@
                     propData = (res.propLine)
                     addLine(yearDataForState);
                     addLineProp(propData, prop);
-
+                    document.getElementById("stateSpan").innerHTML = res.state;
                 }
             });
         }
@@ -270,10 +283,10 @@
     function bubbleData(data){
         bubbles = L.bubbleLayer(data, {
             property: 'eviction-filings',
-            legend: true,
-            max_radius : 40,
+            legend: false,
+            max_radius : 30,
             scale: chroma.brewer.OrRd,
-            tooltip : true,
+            tooltip : false,
             style: { weight: 1, opacity: 1, fillOpacity: 1 }
         })
 
@@ -284,11 +297,11 @@
         d3.select("#line svg").remove();
         var svg = d3.select("#line").append("svg").attr("width",400).attr("height",250);
         var margin = {
-                top: 20,
-                right: 20,
-                bottom: 30,
-                left: 40
-            };
+            top: 20,
+            right: 20,
+            bottom: 30,
+            left: 40
+        };
         var width = +svg.attr("width") - margin.left - margin.right;
         var height = +svg.attr("height") - margin.top - margin.bottom;
 
