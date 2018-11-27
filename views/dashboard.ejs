@@ -132,6 +132,11 @@
     <a href="#" id="scroll-to-top" class="dmtop global-radius"><i class="fa fa-angle-up"></i></a>
 
 <script>
+    setTimeout(function () {
+        var htmlHeader = document.getElementsByTagName("html")[0];
+        htmlHeader.setAttribute("style", "opacity: 1;");
+    },500);
+
     var selectedState;
     selectedState = <%- JSON.stringify(state) %>;
     var mapDataForState = <%- JSON.stringify(mapData) %>;
