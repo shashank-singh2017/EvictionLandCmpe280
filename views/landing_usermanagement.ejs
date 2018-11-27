@@ -138,24 +138,25 @@
 
 
 <body id="page-top" class="politics_version" style="background-color: white;">
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav" style="background-color: #303636;height: 60px;">
+
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav" style="background-color: white;height: 60px;border-bottom: 1px solid; border-color: maroon;">
     <div class="container">
         <a class="navbar-brand js-scroll-trigger" href="#page-top">
             <h2 class="logo">EvictionLand</h2>
         </a>
         <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav text-uppercase ml-auto">
+            <ul class="navbar-nav ml-auto">
                 <li style="color: black; margin-left: 30px;">
-                    <a class="links" href="/admin/home" style="color:white;">Home</a>
+                    <a class="links" href="/admin/home" style="color:maroon;font-size:16px;">Home</a>
                 </li>
                 <li style="color: black; margin-left: 30px;">
-                    <a class="links" href="/admin/bulkupload" style="color:white;">Bulk Upload</a>
+                    <a class="links" href="/admin/bulkupload" style="color:maroon;font-size:16px;">Bulk Upload</a>
                 </li>
                 <li style="color: black; margin-left: 30px;">
-                    <a class="links " href="/admin/usermanage" style="color:white;">User Management</a>
+                    <a class="links " href="/admin/usermanage" style="color:maroon;font-size:16px;">User Management</a>
                 </li>
                 <li style="color: black; margin-left: 30px;">
-                    <a class="links" href="/users/logout" style="color:white;">Logout</a>
+                    <a class="links" href="/users/logout" style="color:maroon;font-size:16px;">Logout</a>
                 </li>
             </ul>
         </div>
@@ -164,16 +165,16 @@
 
 <section id="signup" style="margin-top: 90px; min-height: 81%;">
     <div class="container-fluid">
-        <div style="font-size: 25px;">User Management</div>
-        <div class="forms populateData" style="margin-left: 50px;margin-top: 50px;">
+        <div style="font-size: 25px; margin-left: 50px;">User Management</div>
+        <div class="forms populateData" style="margin-left: 20px;margin-top: 50px; border: none;">
 
-            <div class="">
+            <div>
                 <form class="UserForm" method="get" action="/admin/searchuser">
                     <h4 style="font-weight: 700;">Please enter User's Email ID to search</h4>
                     <div class="">
                         <label for="tags">Search: </label>
-                        <input id="tags" class="searchuser" name="user"><br/>
-                        <button id="searchUser" class="okButton" type="submit">Submit</button>
+                        <input id="tags" class="searchuser" name="user" style="border-radius: 4px;border: 1px solid;border-color: gray; width: 21%;"><br/>
+                        <button id="searchUser" class="okButton" type="submit" style="border-radius: 4px; width: 90px;">Submit</button>
                         <br/>
                         <script>
                             var errorMsg;
@@ -193,29 +194,49 @@
                     var username = userdata[i].email;
                 %>
                 <div id="searchResult" style="width: 500px;margin: auto;">
-                    <div class="userRecord">
-                        <span class="userName">
-                            <%= userdata[i].userName %>
-                        </span>
-                        <span class="email" name="email">
-                                <%= userdata[i].email %>
-                        </span>
-                        <span class="phone">
-                                <%= userdata[i].phone %>
-                        </span>
-                        <div style="    text-align: center;">
+                    <div class="userRecord" style="border-radius: 4px;color: black;width: 100%;">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <span><b>UserName:</b></span>
+                                </div>
+                                <div class="col-md-9">
+                                    <span class="userName"><%= userdata[i].userName %></span>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <span><b>Email:</b></span>
+                                </div>
+                                <div class="col-md-9">
+                                    <span class="email" name="email" style="border: none;"><%= userdata[i].email %></span>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <span><b>Phone:</b></span>
+                                </div>
+                                <div class="col-md-9">
+                                    <span class="phone" style="border: none;"><%= userdata[i].phone %></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="text-align: center;">
                             <span class="delB">
-                            <button class="delete okButton" id="Delete" onclick="deleteuser(event)">Delete</button>
+                            <button class="delete okButton" id="Delete" onclick="deleteuser(event)" style="border-radius: 4px; width: 90px;">Delete</button>
                         </span>
                             <span class="editB">
-                            <button class="edit okButton" id="Edit" onclick="edituser(event)">Edit</button>
+                            <button class="edit okButton" id="Edit" onclick="edituser(event)" style="border-radius: 4px; width: 90px;">Edit</button>
                         </span>
                         </div>
                     </div>
                 </div>
                 <% } %>
                 <% } %>
-                <div id="editContainer" style="width: 500px;margin: auto;border: 1px solid; padding: 20px;">
+                <div id="editContainer" style="width: 500px;margin: auto;border: 1px solid; padding: 20px; border-color: black;border-radius: 4px;">
                     <h3>Edit User:</h3>
                     <div class="inputFields">
                         <label class="feildName">Email: </label>
@@ -233,7 +254,7 @@
                         <label class="error" id="phoneError"></label>
                     </div>
                     <div class="inputFields" style="text-align: center;">
-                        <button class="update okButton" id="Update" onclick="updateuser(event)">Update</button>
+                        <button id="Update" onclick="updateuser(event)" style="border-radius: 4px; width: 90px;background:maroon;color: white;margin-top: 10px;">Update</button>
                     </div>
 
                 </div>
