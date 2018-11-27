@@ -171,7 +171,13 @@ body {
 
 #line {
     display: inline-block;
-    margin-left: 0px;
+    margin: auto;
+    margin-left: 125px;
+}
+
+div#lineprop {
+    margin: auto;
+    margin-left: 125px;
 }
 
 #key .legend {
