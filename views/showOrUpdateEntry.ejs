@@ -68,13 +68,19 @@
 			<h2 class="logo">EvictionLand</h2>
 		</a>
         <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav text-uppercase ml-auto">
-            <li style="color: black; margin-left: 30px;">
-              <a class="links" href="/home" style="color:maroon;font-size:16px;">Home</a>
-            </li>
-            <li style="color: black; margin-left: 30px;">
-              <a class="links" href="/users/login" style="color:maroon;font-size:16px;">Login</a>
-            </li>
+          <ul class="navbar-nav ml-auto">
+              <li style="color: black; margin-left: 30px;">
+                  <a class="links" href="/admin/home" style="color:maroon;font-size:16px;">Home</a>
+              </li>
+              <li style="color: black; margin-left: 30px;">
+                  <a class="links" href="/admin/bulkupload" style="color:maroon;font-size:16px;">Bulk Upload</a>
+              </li>
+              <li style="color: black; margin-left: 30px;">
+                  <a class="links " href="/admin/usermanage" style="color:maroon;font-size:16px;">User Management</a>
+              </li>
+              <li style="color: black; margin-left: 30px;">
+                  <a class="links" href="/users/logout" style="color:maroon;font-size:16px;">Logout</a>
+              </li>
           </ul>
         </div>
       </div>
@@ -88,7 +94,7 @@
         <form name="evictionForm" action="/create/processUpdateEntry" method="post" onsubmit="return validateEvictionForm()">
             <div class="container">
 
-                    <div class="row">
+                    <div class="row" style="display: none;">
                         <div class="col-md-3">
                             <span class="lab">Document Id:</span>
                         </div>
