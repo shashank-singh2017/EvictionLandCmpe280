@@ -22,7 +22,7 @@ var assert = require('assert');
 var app = express();
 
 var store = new MongoDBStore({
-  uri: 'mongodb://ds157843.mlab.com:57843/heroku_chtvczd0',
+  uri: 'mongodb://heroku_chtvczd0:heroku_chtvczd0@ds157843.mlab.com:57843/heroku_chtvczd0',
   collection: 'sessionsData'
 });
 
