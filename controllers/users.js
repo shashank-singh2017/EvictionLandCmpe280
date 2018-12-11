@@ -1,6 +1,6 @@
 const monk = require('monk');
 
-const url = 'localhost:27017/cmpe280';
+const url = 'ds157843.mlab.com:57843/heroku_chtvczd0';
 
 const db = monk(url);
 
