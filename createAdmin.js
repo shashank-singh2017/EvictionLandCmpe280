@@ -31,20 +31,22 @@ createAdmin = function () {
 
 
     // Dont let a user signup if same email id is used.
-    collection.find({"email": userData.email}).then((data) => {
-        if (data.length === 0) {
-            collection.insert(userData).then((dataInserted) => {
-                console.log("signup successfull");
-                console.log("Data inserted into the database.");
-            }).catch((err) => {
-                console.log("Error occured while inserting data into the database");
-            }).then(() => {
+    collection.drop().then(() => {
+        collection.find({"email": userData.email}).then((data) => {
+            if (data.length === 0) {
+                collection.insert(userData).then((dataInserted) => {
+                    console.log("signup successfull");
+                    console.log("Data inserted into the database.");
+                }).catch((err) => {
+                    console.log("Error occured while inserting data into the database");
+                }).then(() => {
+                    db.close();
+                })
+            } else {
+                console.log("An Account exists with the email provided");
                 db.close();
-            })
-        } else {
-            console.log("An Account exists with the email provided");
-            db.close();
-        }
+            }
+        });
     });
 
     //populate USData data
